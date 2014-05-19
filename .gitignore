@@ -1,0 +1,25 @@
+# Gradle Files #
+################
+.gradle
+.m2
+/local.properties
+
+# IDEA Files #
+##############
+out
+.idea
+*.ipr
+*.iws
+*.iml
+atlassian-ide-plugin.xml
+
+# Mac Files #
+#############
+.DS_Store
+
+# Build directories #
+####################
+/target
+*/target
+/build
+*/build
