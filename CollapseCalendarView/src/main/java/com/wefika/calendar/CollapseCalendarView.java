@@ -61,7 +61,7 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
     public CollapseCalendarView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        mManager = new CalendarManager(LocalDate.now(), CalendarManager.State.WEEK);
+        mManager = new CalendarManager(LocalDate.now(), CalendarManager.State.WEEK, null, null);
         mInflater = LayoutInflater.from(context);
 
         mResizeManager = new ResizeManager(this);
@@ -69,8 +69,8 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
         inflate(context, R.layout.calendar_layout, this);
     }
 
-    public void init(@NotNull LocalDate date) {
-        mManager.init(date);
+    public void init(@NotNull LocalDate date, @Nullable LocalDate minDate, @Nullable LocalDate maxDate) {
+        mManager.init(date, minDate, maxDate);
         populateLayout();
         if (mListener != null) {
             mListener.onDateSelected(date);

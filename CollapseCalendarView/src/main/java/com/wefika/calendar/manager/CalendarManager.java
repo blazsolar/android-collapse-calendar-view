@@ -1,6 +1,7 @@
 package com.wefika.calendar.manager;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
@@ -13,14 +14,17 @@ public class CalendarManager {
     @NotNull private CalendarUnit mUnit;
     @NotNull private LocalDate mSelected;
     @NotNull private final LocalDate mToday;
+    @Nullable private LocalDate mMinDate;
+    @Nullable private LocalDate mMaxDate;
 
     private LocalDate mActiveMonth;
 
-    public CalendarManager(@NotNull LocalDate selected, @NotNull State state) {
+    public CalendarManager(@NotNull LocalDate selected, @NotNull State state, @Nullable LocalDate minDate,
+                           @Nullable LocalDate maxDate) {
         mToday = LocalDate.now();
         mState = state;
 
-        init(selected);
+        init(selected, minDate, maxDate);
     }
 
     public boolean selectDay(@NotNull LocalDate date) {
@@ -107,13 +111,13 @@ public class CalendarManager {
 
         // if same month as selected
         if (mUnit.isInView(mSelected)) {
-            mUnit = new Week(mSelected, mToday);
+            mUnit = new Week(mSelected, mToday, mMinDate, mMaxDate);
             mUnit.select(mSelected);
 
             mActiveMonth = mSelected;
         } else {
             mActiveMonth = mUnit.getFrom();
-            mUnit = new Week(mUnit.getFrom(), mToday);
+            mUnit = new Week(mUnit.getFrom(), mToday, mMinDate, mMaxDate);
         }
 
         mState = State.WEEK;
@@ -121,7 +125,7 @@ public class CalendarManager {
 
     private void toggleFromWeek() {
 
-        mUnit = new Month(mActiveMonth, mToday);
+        mUnit = new Month(mActiveMonth, mToday, mMinDate, mMaxDate);
         mUnit.select(mSelected);
 
         mState = State.MONTH;
@@ -129,9 +133,9 @@ public class CalendarManager {
 
     private void init() {
         if (mState == State.MONTH) {
-            mUnit = new Month(mSelected, mToday);
+            mUnit = new Month(mSelected, mToday, mMinDate, mMaxDate);
         } else {
-            mUnit = new Week(mSelected, mToday);
+            mUnit = new Week(mSelected, mToday, mMinDate, mMaxDate);
         }
         mUnit.select(mSelected);
     }
@@ -146,9 +150,11 @@ public class CalendarManager {
         }
     }
 
-    public void init(LocalDate date) {
+    public void init(@NotNull LocalDate date, @Nullable LocalDate minDate, @Nullable LocalDate maxDate) {
         mSelected = date;
         mActiveMonth = date;
+        mMinDate = minDate;
+        mMaxDate = maxDate;
 
         init();
     }

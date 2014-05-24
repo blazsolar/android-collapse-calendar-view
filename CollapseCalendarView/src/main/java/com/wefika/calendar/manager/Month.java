@@ -1,6 +1,7 @@
 package com.wefika.calendar.manager;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
@@ -14,31 +15,62 @@ public class Month extends CalendarUnit {
     @NotNull private final List<Week> mWeeks = new ArrayList<>();
     private int mSelectedIndex = -1;
 
-    protected Month(@NotNull LocalDate date, @NotNull LocalDate today) {
+    @Nullable private LocalDate mMinDate;
+    @Nullable private LocalDate mMaxDate;
+
+    protected Month(@NotNull LocalDate date, @NotNull LocalDate today, @Nullable LocalDate minDate,
+                    @Nullable LocalDate maxDate) {
         super(
                 date.withDayOfMonth(1),
                 date.withDayOfMonth(date.dayOfMonth().getMaximumValue()),
                 "MMMM yyyy",
                 today
         );
+
+        mMinDate = minDate;
+        mMaxDate = maxDate;
+
         build();
     }
 
     @Override
     public boolean hasNext() {
-        return true;
+
+        if (mMaxDate == null) {
+            return true;
+        } else {
+
+            LocalDate to = getTo();
+            int year = mMaxDate.getYear();
+            int yearTo = to.getYear();
+
+            int month = mMaxDate.getMonthOfYear();
+            int monthTo = to.getMonthOfYear();
+
+            return year > yearTo ||
+                    (year == yearTo && month > monthTo);
+
+        }
     }
 
     @Override
     public boolean  hasPrev() {
-        int year = getToday().getYear();
-        int yearFrom = getFrom().getYear();
 
-        int month = getToday().getMonthOfYear();
-        int monthFrom = getFrom().getMonthOfYear();
+        if (mMinDate == null) {
+            return true;
+        } else {
 
-        return year < yearFrom ||
-                (year == yearFrom && month < monthFrom);
+            LocalDate from = getFrom();
+            int year = mMinDate.getYear();
+            int yearFrom = from.getYear();
+
+            int month = mMinDate.getMonthOfYear();
+            int monthFrom = from.getMonthOfYear();
+
+            return year < yearFrom ||
+                    (year == yearFrom && month < monthFrom);
+
+        }
     }
 
     @Override
@@ -112,7 +144,7 @@ public class Month extends CalendarUnit {
 
         LocalDate date = getFrom().withDayOfWeek(1);
         for (int i = 0; i == 0 || getTo().compareTo(date) >= 0; i++) {
-            mWeeks.add(new Week(date, getToday()));
+            mWeeks.add(new Week(date, getToday(), mMinDate, mMaxDate));
             date = date.plusWeeks(1);
         }
 

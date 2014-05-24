@@ -18,6 +18,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         mCalendarView = (CollapseCalendarView) findViewById(R.id.calendar);
-        mCalendarView.init(LocalDate.now());
+        mCalendarView.init(LocalDate.now(), LocalDate.now(), LocalDate.now().plusYears(1));
     }
 }
