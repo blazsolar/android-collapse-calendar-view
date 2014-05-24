@@ -1,4 +1,4 @@
-package com.wefika.calendar;
+package com.wefika.calendar.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -20,10 +20,6 @@ public class WeekView extends ViewGroup {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
 
         int maxSize = widthSize / 7;
         int baseSize = 0;

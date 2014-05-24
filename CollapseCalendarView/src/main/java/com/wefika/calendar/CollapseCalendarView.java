@@ -15,6 +15,8 @@ import com.wefika.calendar.manager.Day;
 import com.wefika.calendar.manager.Month;
 import com.wefika.calendar.manager.ResizeManager;
 import com.wefika.calendar.manager.Week;
+import com.wefika.calendar.widget.DayView;
+import com.wefika.calendar.widget.WeekView;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -217,11 +219,12 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
         List<Day> days = week.getDays();
         for (int i = 0; i < 7; i++) {
             final Day day = days.get(i);
-            TextView dayView = (TextView) weekView.getChildAt(i);
+            DayView dayView = (DayView) weekView.getChildAt(i);
 
             dayView.setText(day.getText());
             dayView.setEnabled(day.isEnabled());
             dayView.setSelected(day.isSelected());
+            dayView.setCurrent(day.isCurrent());
             dayView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {

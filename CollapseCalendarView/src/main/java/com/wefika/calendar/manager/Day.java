@@ -16,11 +16,13 @@ public class Day {
     private boolean mToday;
     private boolean mSelected;
     private boolean mEnabled;
+    private boolean mCurrent;
 
     public Day(@NotNull LocalDate date, boolean today) {
         mDate = date;
         mToday = today;
         mEnabled = true;
+        mCurrent = true;
     }
 
     @NotNull
@@ -42,6 +44,14 @@ public class Day {
 
     public void setSelected(boolean selected) {
         mSelected = selected;
+    }
+
+    public boolean isCurrent() {
+        return mCurrent;
+    }
+
+    public void setCurrent(boolean current) {
+        mCurrent = current;
     }
 
     public boolean isToday() {
