@@ -10,13 +10,10 @@ import java.util.List;
 /**
  * Created by Blaž Šolar on 24/02/14.
  */
-public class Week extends CalendarUnit {
+public class Week extends RangeUnit {
 
     @NotNull
     private final List<Day> mDays = new ArrayList<>(7);
-
-    @Nullable private LocalDate mMinDate;
-    @Nullable private LocalDate mMaxDate;
 
     public Week(@NotNull LocalDate date, @NotNull LocalDate today, @Nullable LocalDate minDate,
                 @Nullable LocalDate maxDate) {
@@ -24,30 +21,31 @@ public class Week extends CalendarUnit {
                 date.withDayOfWeek(1),
                 date.withDayOfWeek(7),
                 "'week' w",
-                today
+                today,
+                minDate,
+                maxDate
         );
-
-        mMinDate = minDate;
-        mMaxDate = maxDate;
 
         build();
     }
 
     @Override
     public boolean hasNext() {
-        if (mMaxDate == null) {
+        LocalDate maxDate = getMaxDate();
+        if (maxDate == null) {
             return true;
         } else {
-            return mMaxDate.isAfter(mDays.get(6).getDate());
+            return maxDate.isAfter(mDays.get(6).getDate());
         }
     }
 
     @Override
     public boolean hasPrev() {
-        if (mMinDate == null) {
+        LocalDate minDate = getMinDate();
+        if (minDate == null) {
             return true;
         } else {
-            return mMinDate.isBefore(mDays.get(0).getDate());
+            return minDate.isBefore(mDays.get(0).getDate());
         }
     }
 
@@ -123,11 +121,13 @@ public class Week extends CalendarUnit {
 
     private boolean isDayEnabled(@NotNull LocalDate date) {
 
-        if (mMinDate != null && date.isBefore(mMinDate)) {
+        LocalDate minDate = getMinDate();
+        if (minDate != null && date.isBefore(minDate)) {
             return false;
         }
 
-        if (mMaxDate != null && date.isAfter(mMaxDate)) {
+        LocalDate maxDate = getMaxDate();
+        if (maxDate != null && date.isAfter(maxDate)) {
             return false;
         }
 

@@ -173,7 +173,7 @@ public class ResizeManager {
 
     private void finishMotionEvent() {
         if (mProgressManager != null && mProgressManager.isInitialized()) {
-                startScolling();
+            startScolling();
         }
     }
 

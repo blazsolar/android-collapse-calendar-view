@@ -2,7 +2,6 @@ package com.wefika.calendar.manager;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
 /**
@@ -11,7 +10,7 @@ import org.joda.time.LocalDate;
 public class CalendarManager {
 
     @NotNull private State mState;
-    @NotNull private CalendarUnit mUnit;
+    @NotNull private RangeUnit mUnit;
     @NotNull private LocalDate mSelected;
     @NotNull private final LocalDate mToday;
     @Nullable private LocalDate mMinDate;
@@ -117,7 +116,7 @@ public class CalendarManager {
             mActiveMonth = mSelected;
         } else {
             mActiveMonth = mUnit.getFrom();
-            mUnit = new Week(mUnit.getFrom(), mToday, mMinDate, mMaxDate);
+            mUnit = new Week(mUnit.getTootleTo(), mToday, mMinDate, mMaxDate);
         }
 
         mState = State.WEEK;
@@ -142,11 +141,9 @@ public class CalendarManager {
 
     public int getWeekOfMonth() {
         if(mUnit.isInView(mSelected)) {
-            LocalDate first = mUnit.getFrom().withDayOfMonth(1).withDayOfWeek(1);
-            Days days = Days.daysBetween(first, mSelected);
-            return days.dividedBy(7).getDays();
+            return mUnit.getWeekInMonth(mSelected);
         } else {
-            return 0; // if not in this month first week should be selected
+            return mUnit.getFirstWeek(); // if not in this month first week should be selected
         }
     }
 

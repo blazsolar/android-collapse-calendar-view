@@ -10,13 +10,10 @@ import java.util.List;
 /**
  * Created by Blaž Šolar on 24/02/14.
  */
-public class Month extends CalendarUnit {
+public class Month extends RangeUnit {
 
     @NotNull private final List<Week> mWeeks = new ArrayList<>();
     private int mSelectedIndex = -1;
-
-    @Nullable private LocalDate mMinDate;
-    @Nullable private LocalDate mMaxDate;
 
     protected Month(@NotNull LocalDate date, @NotNull LocalDate today, @Nullable LocalDate minDate,
                     @Nullable LocalDate maxDate) {
@@ -24,11 +21,10 @@ public class Month extends CalendarUnit {
                 date.withDayOfMonth(1),
                 date.withDayOfMonth(date.dayOfMonth().getMaximumValue()),
                 "MMMM yyyy",
-                today
+                today,
+                minDate,
+                maxDate
         );
-
-        mMinDate = minDate;
-        mMaxDate = maxDate;
 
         build();
     }
@@ -36,15 +32,16 @@ public class Month extends CalendarUnit {
     @Override
     public boolean hasNext() {
 
-        if (mMaxDate == null) {
+        LocalDate maxDate = getMaxDate();
+        if (maxDate == null) {
             return true;
         } else {
 
             LocalDate to = getTo();
-            int year = mMaxDate.getYear();
+            int year = maxDate.getYear();
             int yearTo = to.getYear();
 
-            int month = mMaxDate.getMonthOfYear();
+            int month = maxDate.getMonthOfYear();
             int monthTo = to.getMonthOfYear();
 
             return year > yearTo ||
@@ -56,15 +53,16 @@ public class Month extends CalendarUnit {
     @Override
     public boolean  hasPrev() {
 
-        if (mMinDate == null) {
+        LocalDate minDate = getMinDate();
+        if (minDate == null) {
             return true;
         } else {
 
             LocalDate from = getFrom();
-            int year = mMinDate.getYear();
+            int year = minDate.getYear();
             int yearFrom = from.getYear();
 
-            int month = mMinDate.getMonthOfYear();
+            int month = minDate.getMonthOfYear();
             int monthFrom = from.getMonthOfYear();
 
             return year < yearFrom ||
@@ -144,7 +142,7 @@ public class Month extends CalendarUnit {
 
         LocalDate date = getFrom().withDayOfWeek(1);
         for (int i = 0; i == 0 || getTo().compareTo(date) >= 0; i++) {
-            mWeeks.add(new Week(date, getToday(), mMinDate, mMaxDate));
+            mWeeks.add(new Week(date, getToday(), getMinDate(), getMaxDate()));
             date = date.plusWeeks(1);
         }
 
