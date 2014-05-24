@@ -59,8 +59,7 @@ public class ResizeManager {
 
         switch (action) {
             case MotionEvent.ACTION_DOWN:
-                onDownEvent(ev);
-                break;
+                return onDownEvent(ev);
             case MotionEvent.ACTION_MOVE:
 
                 mVelocityTracker.addMovement(ev);
@@ -106,7 +105,7 @@ public class ResizeManager {
      * Triggered
      * @param event Down event
      */
-    private void onDownEvent(@NotNull MotionEvent event) {
+    private boolean onDownEvent(@NotNull MotionEvent event) {
         if (MotionEventCompat.getActionMasked(event) != MotionEvent.ACTION_DOWN) {
             throw new IllegalStateException("Has to be down event!");
         }
@@ -127,6 +126,9 @@ public class ResizeManager {
                 mDragStartY = mDownY - mScroller.getCurrY();
             }
             mState = State.DRAGGING;
+            return true;
+        } else {
+            return false;
         }
 
     }
