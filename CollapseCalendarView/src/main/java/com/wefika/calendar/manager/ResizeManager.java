@@ -156,12 +156,14 @@ public class ResizeManager {
 
             if (mProgressManager == null) {
 
+                int weekOfMonth = manager.getWeekOfMonth();
+
                 if (state == CalendarManager.State.WEEK) { // always animate in month view
                     manager.toggleView();
                     mCalendarView.populateLayout();
                 }
 
-                mProgressManager = new ProgressManagerImpl(mCalendarView, manager.getWeekOfMonth(),
+                mProgressManager = new ProgressManagerImpl(mCalendarView, weekOfMonth,
                         state == CalendarManager.State.MONTH);
             }
 

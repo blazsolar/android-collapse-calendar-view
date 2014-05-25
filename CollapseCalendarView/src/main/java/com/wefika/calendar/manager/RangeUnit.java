@@ -31,10 +31,11 @@ public abstract class RangeUnit extends CalendarUnit {
     }
 
     public int getFirstWeek() {
-        if (mMinDate != null && mMinDate.isAfter(getFrom())) { // TODO check if same month
+        LocalDate from = getFrom();
+        if (mMinDate != null && mMinDate.isAfter(from)) { // TODO check if same month
             return getWeekInMonth(mMinDate);
         } else {
-            return 0;
+            return getWeekInMonth(from);
         }
     }
 
