@@ -111,7 +111,6 @@ public class CalendarManager {
         // if same month as selected
         if (mUnit.isInView(mSelected)) {
             toggleFromMonth(mSelected);
-            mUnit.select(mSelected);
 
             mActiveMonth = mSelected;
         } else {
@@ -121,11 +120,13 @@ public class CalendarManager {
     }
 
     void toggleToWeek(int weekInMonth) {
-        toggleFromMonth(mUnit.getFrom().plusDays(weekInMonth * 7));
+        LocalDate date = mUnit.getFrom().plusDays(weekInMonth * 7);
+        toggleFromMonth(date);
     }
 
     private void toggleFromMonth(LocalDate date) {
         mUnit = new Week(date, mToday, mMinDate, mMaxDate);
+        mUnit.select(mSelected);
         mState = State.WEEK;
     }
 
