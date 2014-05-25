@@ -82,7 +82,7 @@ public abstract class CalendarUnit {
     }
 
     protected int getWeekInMonth(@NotNull LocalDate date) {
-        LocalDate first = getFrom().withDayOfMonth(1).withDayOfWeek(1);
+        LocalDate first = date.withDayOfMonth(1).withDayOfWeek(1);
         Days days = Days.daysBetween(first, date);
         return days.dividedBy(7).getDays();
     }

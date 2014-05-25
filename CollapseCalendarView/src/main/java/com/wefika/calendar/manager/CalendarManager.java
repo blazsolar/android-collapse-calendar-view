@@ -150,7 +150,7 @@ public class CalendarManager {
         if(mUnit.isInView(mSelected)) {
             return mUnit.getWeekInMonth(mSelected);
         } else {
-            return mUnit.getFirstWeek(); // if not in this month first week should be selected
+            return mUnit.getFirstWeek(mActiveMonth); // if not in this month first week should be selected
         }
     }
 

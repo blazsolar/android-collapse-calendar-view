@@ -30,12 +30,12 @@ public abstract class RangeUnit extends CalendarUnit {
         return mMaxDate;
     }
 
-    public int getFirstWeek() {
+    public int getFirstWeek(LocalDate currentMonth) {
         LocalDate from = getFrom();
         if (mMinDate != null && mMinDate.isAfter(from)) { // TODO check if same month
             return getWeekInMonth(mMinDate);
         } else {
-            return getWeekInMonth(from);
+            return getWeekInMonth(currentMonth);
         }
     }
 
