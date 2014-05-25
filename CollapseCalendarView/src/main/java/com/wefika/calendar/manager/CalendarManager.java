@@ -119,7 +119,7 @@ public class CalendarManager {
             setActiveMonth(mSelected);
         } else {
             setActiveMonth(mUnit.getFrom());
-            toggleFromMonth(mActiveMonth);
+            toggleFromMonth(mUnit.getFirstDateOfCurrentMonth(mActiveMonth));
         }
     }
 
