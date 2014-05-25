@@ -52,11 +52,10 @@ public abstract class RangeUnit extends CalendarUnit {
     @Nullable
     abstract LocalDate getFirstDateOfCurrentMonth(@NotNull LocalDate currentMonth);
 
-    protected int getWeekInMonth(@NotNull LocalDate activeMonth) {
-        LocalDate from = getFirstDateOfCurrentMonth(activeMonth);
-        if (from != null) {
-            LocalDate first = from.withDayOfMonth(1).withDayOfWeek(1);
-            Days days = Days.daysBetween(first, from);
+    protected int getWeekInMonth(@NotNull LocalDate date) {
+        if (date != null) {
+            LocalDate first = date.withDayOfMonth(1).withDayOfWeek(1);
+            Days days = Days.daysBetween(first, date);
             return days.dividedBy(7).getDays();
         } else {
             return 0;
