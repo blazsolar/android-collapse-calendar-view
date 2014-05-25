@@ -2,7 +2,6 @@ package com.wefika.calendar.manager;
 
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTimeConstants;
-import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -77,14 +76,9 @@ public abstract class CalendarUnit {
 
     public abstract void build();
 
+
     public String getHeaderText() {
         return mFrom.toString(mHeaderFormat);
-    }
-
-    protected int getWeekInMonth(@NotNull LocalDate date) {
-        LocalDate first = date.withDayOfMonth(1).withDayOfWeek(1);
-        Days days = Days.daysBetween(first, date);
-        return days.dividedBy(7).getDays();
     }
 
 }

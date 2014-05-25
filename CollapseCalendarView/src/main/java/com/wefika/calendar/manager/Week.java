@@ -133,4 +133,24 @@ public class Week extends RangeUnit {
 
         return true;
     }
+
+    @Nullable
+    @Override
+    LocalDate getFirstDateOfCurrentMonth(@NotNull LocalDate currentMonth) {
+
+        int year = currentMonth.getYear();
+        int month = currentMonth.getMonthOfYear();
+
+        LocalDate date = getFrom();
+        for(; date.compareTo(getTo()) <= 0; date = date.plusDays(1)) {
+            int fromYear = date.getYear();
+            int fromMonth = date.getMonthOfYear();
+
+            if (year == fromYear && month == fromMonth) {
+                return date;
+            }
+        }
+
+        return null;
+    }
 }

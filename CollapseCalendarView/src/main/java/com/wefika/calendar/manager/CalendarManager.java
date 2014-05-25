@@ -33,7 +33,7 @@ public class CalendarManager {
             mUnit.select(mSelected);
 
             if (mState == State.WEEK) {
-                mActiveMonth = date;
+                setActiveMonth(date);
             }
             return true;
         } else {
@@ -64,7 +64,7 @@ public class CalendarManager {
         boolean next = mUnit.next();
         mUnit.select(mSelected);
 
-        mActiveMonth = mUnit.getFrom();
+        setActiveMonth(mUnit.getFrom());
 
         return next;
     }
@@ -74,7 +74,7 @@ public class CalendarManager {
         boolean prev = mUnit.prev();
         mUnit.select(mSelected);
 
-        mActiveMonth = mUnit.getTo();
+        setActiveMonth(mUnit.getTo());
 
         return prev;
     }
@@ -106,15 +106,19 @@ public class CalendarManager {
         return mActiveMonth;
     }
 
+    private void setActiveMonth(LocalDate activeMonth) {
+        mActiveMonth = activeMonth.withDayOfMonth(1);
+    }
+
     private void toggleFromMonth() {
 
         // if same month as selected
         if (mUnit.isInView(mSelected)) {
             toggleFromMonth(mSelected);
 
-            mActiveMonth = mSelected;
+            setActiveMonth(mSelected);
         } else {
-            mActiveMonth = mUnit.getFrom();
+            setActiveMonth(mUnit.getFrom());
             toggleFromMonth(mActiveMonth);
         }
     }
@@ -157,7 +161,7 @@ public class CalendarManager {
 
     public void init(@NotNull LocalDate date, @Nullable LocalDate minDate, @Nullable LocalDate maxDate) {
         mSelected = date;
-        mActiveMonth = date;
+        setActiveMonth(date);
         mMinDate = minDate;
         mMaxDate = maxDate;
 

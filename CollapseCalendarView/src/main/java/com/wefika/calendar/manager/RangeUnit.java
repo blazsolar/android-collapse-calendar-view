@@ -2,6 +2,7 @@ package com.wefika.calendar.manager;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
 /**
@@ -39,12 +40,26 @@ public abstract class RangeUnit extends CalendarUnit {
         }
     }
 
-    LocalDate getTootleTo() {
+    LocalDate getFirstEnabled() {
         LocalDate from = getFrom();
         if (mMinDate != null && from.isBefore(mMinDate)) {
             return mMinDate;
         } else {
             return from;
+        }
+    }
+
+    @Nullable
+    abstract LocalDate getFirstDateOfCurrentMonth(@NotNull LocalDate currentMonth);
+
+    protected int getWeekInMonth(@NotNull LocalDate activeMonth) {
+        LocalDate from = getFirstDateOfCurrentMonth(activeMonth);
+        if (from != null) {
+            LocalDate first = from.withDayOfMonth(1).withDayOfWeek(1);
+            Days days = Days.daysBetween(first, from);
+            return days.dividedBy(7).getDays();
+        } else {
+            return 0;
         }
     }
 }

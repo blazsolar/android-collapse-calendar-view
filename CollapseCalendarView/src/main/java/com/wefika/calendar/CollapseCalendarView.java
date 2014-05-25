@@ -222,21 +222,28 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
             DayView dayView = (DayView) weekView.getChildAt(i);
 
             dayView.setText(day.getText());
-            dayView.setEnabled(day.isEnabled());
             dayView.setSelected(day.isSelected());
             dayView.setCurrent(day.isCurrent());
-            dayView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    LocalDate date = day.getDate();
-                    if(mManager.selectDay(date)) {
-                        populateLayout();
-                        if (mListener != null) {
-                            mListener.onDateSelected(date);
+
+            boolean enables = day.isEnabled();
+            dayView.setEnabled(enables);
+
+            if (enables) {
+                dayView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LocalDate date = day.getDate();
+                        if (mManager.selectDay(date)) {
+                            populateLayout();
+                            if (mListener != null) {
+                                mListener.onDateSelected(date);
+                            }
                         }
                     }
-                }
-            });
+                });
+            } else {
+                dayView.setOnClickListener(null);
+            }
         }
 
     }

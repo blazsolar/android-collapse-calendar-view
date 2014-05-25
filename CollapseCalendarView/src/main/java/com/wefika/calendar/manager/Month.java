@@ -147,4 +147,23 @@ public class Month extends RangeUnit {
         }
 
     }
+
+    @Nullable
+    @Override
+    LocalDate getFirstDateOfCurrentMonth(@NotNull LocalDate currentMonth) {
+
+        int year = currentMonth.getYear();
+        int month = currentMonth.getMonthOfYear();
+
+        LocalDate from = getFirstEnabled();
+        int fromYear = from.getYear();
+        int fromMonth = from.getMonthOfYear();
+
+        if (year == fromYear && month == fromMonth) {
+            return from;
+        } else {
+            return null;
+        }
+
+    }
 }
