@@ -44,7 +44,12 @@ public class ProgressManagerImpl extends ProgressManager {
                 }
 
                 if (!expanded) {
-                    mCalendarView.getManager().toggleView();
+                    CalendarManager manager = mCalendarView.getManager();
+                    if (mFromMonth) {
+                        manager.toggleView();
+                    } else {
+                        manager.toggleToWeek(mActiveIndex);
+                    }
                     mCalendarView.populateLayout();
                 }
             }

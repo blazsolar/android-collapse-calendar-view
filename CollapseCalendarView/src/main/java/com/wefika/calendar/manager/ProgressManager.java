@@ -23,11 +23,11 @@ public abstract class ProgressManager {
     protected SizeViewHolder mCalendarHolder;
     protected SizeViewHolder mWeeksHolder;
 
-    private final int mActiveIndex;
+    final int mActiveIndex;
 
     private boolean mInitialized = false;
 
-    private final boolean mFromMonth;
+    final boolean mFromMonth;
 
     protected ProgressManager(@NotNull CollapseCalendarView calendarView, int activeWeek, boolean fromMonth) {
         mCalendarView = calendarView;
