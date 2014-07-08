@@ -153,7 +153,13 @@ public class CalendarManager {
 
     public int getWeekOfMonth() {
         if(mUnit.isInView(mSelected)) {
-            return mUnit.getWeekInMonth(mSelected);
+            if (mUnit.isIn(mSelected)) { // TODO not pretty
+                return mUnit.getWeekInMonth(mSelected);
+            } else if (mUnit.getFrom().isAfter(mSelected)) {
+                return mUnit.getWeekInMonth(mUnit.getFrom());
+            } else {
+                return mUnit.getWeekInMonth(mUnit.getTo());
+            }
         } else {
             return mUnit.getFirstWeek(mUnit.getFirstDateOfCurrentMonth(mActiveMonth)); // if not in this month first week should be selected
         }
