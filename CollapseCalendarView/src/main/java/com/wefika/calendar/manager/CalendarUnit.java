@@ -76,9 +76,33 @@ public abstract class CalendarUnit {
 
     public abstract void build();
 
-
     public String getHeaderText() {
         return mFrom.toString(mHeaderFormat);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CalendarUnit)) return false;
+
+        CalendarUnit that = (CalendarUnit) o;
+
+        if (mSelected != that.mSelected) return false;
+        if (!mFrom.equals(that.mFrom)) return false;
+        if (!mHeaderFormat.equals(that.mHeaderFormat)) return false;
+        if (!mTo.equals(that.mTo)) return false;
+        if (!mToday.equals(that.mToday)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = mHeaderFormat.hashCode();
+        result = 31 * result + mToday.hashCode();
+        result = 31 * result + mFrom.hashCode();
+        result = 31 * result + mTo.hashCode();
+        result = 31 * result + (mSelected ? 1 : 0);
+        return result;
+    }
 }

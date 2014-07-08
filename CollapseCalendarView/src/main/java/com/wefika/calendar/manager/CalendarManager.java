@@ -174,6 +174,24 @@ public class CalendarManager {
         init();
     }
 
+    @Nullable
+    public LocalDate getMinDate() {
+        return mMinDate;
+    }
+
+    public void setMinDate(@Nullable LocalDate minDate) {
+        mMinDate = minDate;
+    }
+
+    @Nullable
+    public LocalDate getMaxDate() {
+        return mMaxDate;
+    }
+
+    public void setMaxDate(@Nullable LocalDate maxDate) {
+        mMaxDate = maxDate;
+    }
+
     public enum State {
         MONTH,
         WEEK
