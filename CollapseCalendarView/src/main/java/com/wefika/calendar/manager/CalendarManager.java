@@ -129,14 +129,14 @@ public class CalendarManager {
     }
 
     private void toggleFromMonth(LocalDate date) {
-        mUnit = new Week(date, mToday, mMinDate, mMaxDate);
+        setUnit(new Week(date, mToday, mMinDate, mMaxDate));
         mUnit.select(mSelected);
         mState = State.WEEK;
     }
 
     private void toggleFromWeek() {
 
-        mUnit = new Month(mActiveMonth, mToday, mMinDate, mMaxDate);
+        setUnit(new Month(mActiveMonth, mToday, mMinDate, mMaxDate));
         mUnit.select(mSelected);
 
         mState = State.MONTH;
@@ -144,11 +144,17 @@ public class CalendarManager {
 
     private void init() {
         if (mState == State.MONTH) {
-            mUnit = new Month(mSelected, mToday, mMinDate, mMaxDate);
+            setUnit(new Month(mSelected, mToday, mMinDate, mMaxDate));
         } else {
-            mUnit = new Week(mSelected, mToday, mMinDate, mMaxDate);
+            setUnit(new Week(mSelected, mToday, mMinDate, mMaxDate));
         }
         mUnit.select(mSelected);
+    }
+
+    void setUnit(@NotNull RangeUnit unit) {
+        if (unit != null) {
+            mUnit = unit;
+        }
     }
 
     public int getWeekOfMonth() {
