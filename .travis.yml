@@ -20,7 +20,7 @@ env:
 #    - android-sdk-license-598b93a6
 
 before_install:
-  git clone git@github.com:blazsolar/coveralls-gradle-plugin.git coveralls-gradle-plugin
+  - git clone git@github.com:blazsolar/coveralls-gradle-plugin.git coveralls-gradle-plugin
   # workaround for travis-ci/travis-ci#2279
   - 'sudo mv /usr/local/android-sdk/tools/android-* /usr/local/bin'
   # Accept all licenses (workaround for travis-ci/travis-ci#2466)
@@ -32,7 +32,6 @@ before_install:
   - "android-update-sdk --components='extra-android-m2repository,extra-google-m2repository' --accept-licenses='.+'"
 
 install:
-  - git clone git@github.com:blazsolar/coveralls-gradle-plugin.git
   - cd coveralls-gradle-plugin
   - gradle install
   - cd ..
