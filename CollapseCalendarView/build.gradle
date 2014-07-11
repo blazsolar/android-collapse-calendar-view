@@ -4,12 +4,14 @@ buildscript {
     }
     dependencies {
         classpath 'org.robolectric:robolectric-gradle-plugin:0.11.+'
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.6.1'
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'robolectric'
 apply plugin: "jacoco"
+apply plugin: 'coveralls'
 
 android {
     compileSdkVersion 20
@@ -79,7 +81,6 @@ dependencies {
 }
 
 jacoco {
-    // I have only tried 0.7.x
     toolVersion = "0.7.1.201405082137"
 }
 

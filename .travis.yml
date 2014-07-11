@@ -36,3 +36,6 @@ install:
 
 script:
   - gradle test
+
+after_success:
+  - gradle jacocoTestReport coveralls
