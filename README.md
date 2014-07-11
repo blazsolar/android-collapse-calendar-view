@@ -1,7 +1,7 @@
 CollapseCalendarView
 ====================
 
-CollapseCalendarView is opensource Android Library that allows developers to easily add calendar to
+CollapseCalendarView is open source Android Library that allows developers to easily add calendar to
 their app. CollapseCalendarView can be toggled between month and week view. 
 
 Example
