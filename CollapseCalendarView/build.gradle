@@ -84,6 +84,10 @@ jacoco {
     toolVersion = "0.7.1.201405082137"
 }
 
+coveralls {
+    jacocoReportPath = 'build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
+}
+
 // Define coverage source.
 // If you have rs/aidl etc... add them here.
 def coverageSourceDirs = [
