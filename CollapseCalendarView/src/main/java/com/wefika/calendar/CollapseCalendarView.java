@@ -67,6 +67,8 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
         mResizeManager = new ResizeManager(this);
 
         inflate(context, R.layout.calendar_layout, this);
+
+        setOrientation(VERTICAL);
     }
 
     public void init(@NotNull LocalDate date, @Nullable LocalDate minDate, @Nullable LocalDate maxDate) {
