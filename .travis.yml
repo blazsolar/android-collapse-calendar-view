@@ -12,6 +12,7 @@ env:
 android:
   components:
     - build-tools-20.0.0
+    - extra-android-m2repository
 
 install:
   - true
