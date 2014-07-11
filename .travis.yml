@@ -32,10 +32,13 @@ before_install:
   - "android-update-sdk --components='extra-android-m2repository,extra-google-m2repository' --accept-licenses='.+'"
 
 install:
-  - true
+  - git clone git@github.com:blazsolar/coveralls-gradle-plugin.git
+  - cd coveralls-gradle-plugin
+  - gradle install
+  - cd ..
 
 script:
   - gradle test
 
 after_success:
-  - gradle jacocoTestReport coveralls --stacktrace
+  - gradle jacocoTestReport coveralls
