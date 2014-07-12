@@ -5,7 +5,7 @@ CollapseCalendarView is open source Android Library that allows developers to ea
 their app. CollapseCalendarView can be toggled between month and week view. 
 
 [![Build Status](https://travis-ci.org/blazsolar/android-collapse-calendar-view.svg?branch=develop)](https://travis-ci.org/blazsolar/android-collapse-calendar-view)
-[![Coverage Status](https://coveralls.io/repos/blazsolar/android-collapse-calendar-view/badge.png?branch=feature%2Ftests)](https://coveralls.io/r/blazsolar/android-collapse-calendar-view?branch=feature%2Ftests)
+[![Coverage Status](https://coveralls.io/repos/blazsolar/android-collapse-calendar-view/badge.png?branch=develop)](https://coveralls.io/r/blazsolar/android-collapse-calendar-view?branch=develop)
 
 Example
 -------
