@@ -9,6 +9,13 @@ env:
   matrix:
     - ANDROID_TARGET=android-18 ANDROID_ABI=armeabi-v7a
 
+env:
+  global:
+    - "ARTIFACTS_AWS_REGION=us-west-2"
+    - "ARTIFACTS_S3_BUCKET=ARTIFACTS_S3_BUCKET"
+    - secure: "lFeUSH2N+gGZyPBqI6LOBMnG8adjonjOohOvrz8nCcUV4Wn7/tHW7i4CzYDp/HUR+s3EBE7QFmBiifM4UTEnSvLpQUkfDS/86wfVlLUTnpiZqUWhLJIQFDZhiNJ3YGH197PG8+OZ1+BGzCFQXI1gt5pNFyMToCeP4cljL9DZdow="
+    - secure: "kV99P8eZDRpfErIW+8i+Sz6pqyjsQ4VbtW8L/gg1lWSk/OVCz/BuJBfUpr8SIH/lDP5AsuP4vzWEkNuozbjv4whG3FCek73p1St3lSDZbestqbipshWfitkZwtz8KQnat5VnY35AeWKFstGKsDRtIIoaqLQnaqXqkyOF/DEypU0="
+
 #android:
 #  components:
 #    - build-tools-20.0.0
@@ -36,8 +43,14 @@ install:
   - gradle install
   - cd ..
 
+before_script:
+  - "gem install travis-artifacts"
+
 script:
   - gradle test
+
+after_script:
+  - "travis-artifacts upload --path logs --path CollapseCalendarView/build/test-report"
 
 after_success:
   - gradle jacocoTestReport coveralls
