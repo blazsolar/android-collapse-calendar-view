@@ -50,7 +50,7 @@ script:
   - gradle test
 
 after_script:
-  - "travis-artifacts upload --path logs --path CollapseCalendarView/build/test-report"
+  - "travis-artifacts upload --path CollapseCalendarView/build/test-report"
 
 after_success:
   - gradle jacocoTestReport coveralls
