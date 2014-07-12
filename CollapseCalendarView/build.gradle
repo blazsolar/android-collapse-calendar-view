@@ -1,15 +1,18 @@
 buildscript {
     repositories{
         mavenCentral()
+        mavenLocal()
     }
     dependencies {
         classpath 'org.robolectric:robolectric-gradle-plugin:0.11.+'
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.6.2-SNAPSHOT'
     }
 }
 
 apply plugin: 'com.android.library'
 apply plugin: 'robolectric'
 apply plugin: "jacoco"
+apply plugin: 'coveralls'
 
 android {
     compileSdkVersion 20
@@ -78,8 +81,12 @@ dependencies {
 }
 
 jacoco {
-    // I have only tried 0.7.x
     toolVersion = "0.7.1.201405082137"
+}
+
+coveralls {
+    jacocoReportPath = 'build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml'
+    saveAsFile = true
 }
 
 // Define coverage source.
