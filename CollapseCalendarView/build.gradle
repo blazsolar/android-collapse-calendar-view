@@ -130,3 +130,5 @@ task jacocoTestReport(type: JacocoReport, dependsOn: "testDebug") {
         testDebug.reports.junitXml.enabled = false
     }
 }
+
+apply from: 'maven_push.gradle'
