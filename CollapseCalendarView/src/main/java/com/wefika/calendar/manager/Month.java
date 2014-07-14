@@ -102,11 +102,13 @@ public class Month extends RangeUnit {
 
     @Override
     public void deselect(@NotNull LocalDate date) {
-        if (isSelected()) {
-            mSelectedIndex = -1;
+        if (date != null && isSelected() && isInView(date)) {
             for (Week week : mWeeks) {
-                setSelected(false);
-                week.deselect(date);
+                if (week.isSelected() && week.isIn(date)) {
+                    mSelectedIndex = -1;
+                    setSelected(false);
+                    week.deselect(date);
+                }
             }
         }
     }
@@ -152,18 +154,20 @@ public class Month extends RangeUnit {
     @Override
     LocalDate getFirstDateOfCurrentMonth(@NotNull LocalDate currentMonth) {
 
-        int year = currentMonth.getYear();
-        int month = currentMonth.getMonthOfYear();
+        if (currentMonth != null) {
+            int year = currentMonth.getYear();
+            int month = currentMonth.getMonthOfYear();
 
-        LocalDate from = getFirstEnabled();
-        int fromYear = from.getYear();
-        int fromMonth = from.getMonthOfYear();
+            LocalDate from = getFirstEnabled();
+            int fromYear = from.getYear();
+            int fromMonth = from.getMonthOfYear();
 
-        if (year == fromYear && month == fromMonth) {
-            return from;
-        } else {
-            return null;
+            if (year == fromYear && month == fromMonth) {
+                return from;
+            }
         }
+
+        return null;
 
     }
 }

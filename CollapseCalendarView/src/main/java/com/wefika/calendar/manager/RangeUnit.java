@@ -2,6 +2,7 @@ package com.wefika.calendar.manager;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joda.time.DateTimeConstants;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
@@ -17,6 +18,9 @@ public abstract class RangeUnit extends CalendarUnit {
                         @NotNull LocalDate today, @Nullable LocalDate minDate, @Nullable LocalDate maxDate) {
         super(from, to, headerPattern, today);
 
+        if (minDate != null && maxDate != null && minDate.isAfter(maxDate)) {
+            throw new IllegalArgumentException("Min date should be before max date");
+        }
         mMinDate = minDate;
         mMaxDate = maxDate;
     }
@@ -31,13 +35,22 @@ public abstract class RangeUnit extends CalendarUnit {
         return mMaxDate;
     }
 
-    public int getFirstWeek(LocalDate currentMonth) {
+    /**
+     *
+     *
+     * @param firstDayOfMonth First day of current month in range unit
+     * @return Week of month of first enabled date, 0 if no dates are enabled.
+     */
+    public int getFirstWeek(@Nullable LocalDate firstDayOfMonth) {
         LocalDate from = getFrom();
+        LocalDate date;
         if (mMinDate != null && mMinDate.isAfter(from)) { // TODO check if same month
-            return getWeekInMonth(mMinDate);
+            date = mMinDate;
         } else {
-            return getWeekInMonth(currentMonth);
+            date = firstDayOfMonth;
         }
+
+        return getWeekInMonth(date);
     }
 
     LocalDate getFirstEnabled() {
@@ -52,11 +65,11 @@ public abstract class RangeUnit extends CalendarUnit {
     @Nullable
     abstract LocalDate getFirstDateOfCurrentMonth(@NotNull LocalDate currentMonth);
 
-    protected int getWeekInMonth(@NotNull LocalDate date) {
+    protected int getWeekInMonth(@Nullable LocalDate date) {
         if (date != null) {
-            LocalDate first = date.withDayOfMonth(1).withDayOfWeek(1);
+            LocalDate first = date.withDayOfMonth(1).withDayOfWeek(DateTimeConstants.MONDAY);
             Days days = Days.daysBetween(first, date);
-            return days.dividedBy(7).getDays();
+            return days.dividedBy(DateTimeConstants.DAYS_PER_WEEK).getDays();
         } else {
             return 0;
         }

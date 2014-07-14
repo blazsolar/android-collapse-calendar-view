@@ -67,7 +67,7 @@ public abstract class CalendarUnit {
 
     public boolean isInView(@NotNull LocalDate date) {
         return !mFrom.withDayOfWeek(DateTimeConstants.MONDAY).isAfter(date)
-                && !mTo.plusWeeks(1).withDayOfWeek(DateTimeConstants.SUNDAY).isBefore(date);
+                && !mTo.withDayOfWeek(DateTimeConstants.SUNDAY).isBefore(date);
     }
 
     public abstract void deselect(@NotNull LocalDate date);
