@@ -75,7 +75,7 @@ public class Week extends RangeUnit {
 
     @Override
     public void deselect(@NotNull LocalDate date) {
-        if (getFrom().compareTo(date) <= 0 &&
+        if (date != null && getFrom().compareTo(date) <= 0 &&
                 getTo().compareTo(date) >= 0) {
             setSelected(false);
 
@@ -87,7 +87,7 @@ public class Week extends RangeUnit {
 
     @Override
     public boolean select(@NotNull LocalDate date) {
-        if (getFrom().compareTo(date) <= 0 &&
+        if (date != null && getFrom().compareTo(date) <= 0 &&
                 getTo().compareTo(date) >= 0) {
             setSelected(true);
 
@@ -138,16 +138,18 @@ public class Week extends RangeUnit {
     @Override
     LocalDate getFirstDateOfCurrentMonth(@NotNull LocalDate currentMonth) {
 
-        int year = currentMonth.getYear();
-        int month = currentMonth.getMonthOfYear();
+        if (currentMonth != null) {
+            int year = currentMonth.getYear();
+            int month = currentMonth.getMonthOfYear();
 
-        LocalDate date = getFrom();
-        for(; date.compareTo(getTo()) <= 0; date = date.plusDays(1)) {
-            int fromYear = date.getYear();
-            int fromMonth = date.getMonthOfYear();
+            LocalDate date = getFrom();
+            for (; date.compareTo(getTo()) <= 0; date = date.plusDays(1)) {
+                int fromYear = date.getYear();
+                int fromMonth = date.getMonthOfYear();
 
-            if (year == fromYear && month == fromMonth) {
-                return date;
+                if (year == fromYear && month == fromMonth) {
+                    return date;
+                }
             }
         }
 
