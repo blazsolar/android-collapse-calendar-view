@@ -289,4 +289,9 @@ public class WeekTest {
     public void testGetFirstDateOfCurrentMonth() throws Exception {
         assertEquals(LocalDate.parse("2014-08-01"), mWeek.getFirstDateOfCurrentMonth(LocalDate.parse("2014-08-23")));
     }
+
+    @Test
+    public void testHeaderText() throws Exception {
+        assertEquals("week 31", mWeek.getHeaderText());
+    }
 }
