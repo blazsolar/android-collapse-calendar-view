@@ -1,6 +1,7 @@
 package com.wefika.calendar.manager;
 
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
+
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
@@ -17,8 +18,8 @@ public abstract class CalendarUnit {
     private LocalDate mTo;
     private boolean mSelected;
 
-    protected CalendarUnit(@NotNull LocalDate from, @NotNull LocalDate to,
-                           @NotNull String headerPattern, @NotNull LocalDate today) {
+    protected CalendarUnit(@NonNull LocalDate from, @NonNull LocalDate to,
+                           @NonNull String headerPattern, @NonNull LocalDate today) {
         mToday = today;
         mFrom = from;
         mTo = to;
@@ -37,11 +38,11 @@ public abstract class CalendarUnit {
         return mTo;
     }
 
-    protected void setFrom(@NotNull LocalDate from) {
+    protected void setFrom(@NonNull LocalDate from) {
         mFrom = from;
     }
 
-    protected void setTo(@NotNull LocalDate to) {
+    protected void setTo(@NonNull LocalDate to) {
         mTo = to;
     }
 
@@ -61,18 +62,18 @@ public abstract class CalendarUnit {
 
     public abstract boolean prev();
 
-    public boolean isIn(@NotNull LocalDate date) {
+    public boolean isIn(@NonNull LocalDate date) {
         return !mFrom.isAfter(date) && !mTo.isBefore(date);
     }
 
-    public boolean isInView(@NotNull LocalDate date) {
+    public boolean isInView(@NonNull LocalDate date) {
         return !mFrom.withDayOfWeek(DateTimeConstants.MONDAY).isAfter(date)
                 && !mTo.withDayOfWeek(DateTimeConstants.SUNDAY).isBefore(date);
     }
 
-    public abstract void deselect(@NotNull LocalDate date);
+    public abstract void deselect(@NonNull LocalDate date);
 
-    public abstract boolean select(@NotNull LocalDate date);
+    public abstract boolean select(@NonNull LocalDate date);
 
     public abstract void build();
 

@@ -1,7 +1,8 @@
 package com.wefika.calendar.manager;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import org.joda.time.DateTimeConstants;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
@@ -14,8 +15,8 @@ public abstract class RangeUnit extends CalendarUnit {
     @Nullable private LocalDate mMinDate;
     @Nullable private LocalDate mMaxDate;
 
-    protected RangeUnit(@NotNull LocalDate from, @NotNull LocalDate to, @NotNull String headerPattern,
-                        @NotNull LocalDate today, @Nullable LocalDate minDate, @Nullable LocalDate maxDate) {
+    protected RangeUnit(@NonNull LocalDate from, @NonNull LocalDate to, @NonNull String headerPattern,
+                        @NonNull LocalDate today, @Nullable LocalDate minDate, @Nullable LocalDate maxDate) {
         super(from, to, headerPattern, today);
 
         if (minDate != null && maxDate != null && minDate.isAfter(maxDate)) {
@@ -63,7 +64,7 @@ public abstract class RangeUnit extends CalendarUnit {
     }
 
     @Nullable
-    abstract LocalDate getFirstDateOfCurrentMonth(@NotNull LocalDate currentMonth);
+    abstract LocalDate getFirstDateOfCurrentMonth(@NonNull LocalDate currentMonth);
 
     protected int getWeekInMonth(@Nullable LocalDate date) {
         if (date != null) {

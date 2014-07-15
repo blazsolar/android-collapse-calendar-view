@@ -1,12 +1,11 @@
 package com.wefika.calendar.manager;
 
+import android.support.annotation.NonNull;
 import android.widget.LinearLayout;
 
 import com.wefika.calendar.CollapseCalendarView;
 import com.wefika.calendar.models.AbstractViewHolder;
 import com.wefika.calendar.models.SizeViewHolder;
-
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by Blaz Solar on 17/04/14.
@@ -15,7 +14,7 @@ public abstract class ProgressManager {
 
     private static final String TAG = "ProgressManager";
 
-    @NotNull protected CollapseCalendarView mCalendarView;
+    @NonNull protected CollapseCalendarView mCalendarView;
 
     protected LinearLayout mWeeksView;
     protected AbstractViewHolder[] mViews;
@@ -29,7 +28,7 @@ public abstract class ProgressManager {
 
     final boolean mFromMonth;
 
-    protected ProgressManager(@NotNull CollapseCalendarView calendarView, int activeWeek, boolean fromMonth) {
+    protected ProgressManager(@NonNull CollapseCalendarView calendarView, int activeWeek, boolean fromMonth) {
         mCalendarView = calendarView;
         mWeeksView = calendarView.getWeeksView();
         mActiveIndex = activeWeek;

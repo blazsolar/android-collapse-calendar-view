@@ -34,6 +34,10 @@ public class DayView extends TextView {
         }
     }
 
+    public boolean isCurrent() {
+        return mCurrent;
+    }
+
     @Override
     protected int[] onCreateDrawableState(int extraSpace) {
         final int[] state = super.onCreateDrawableState(extraSpace + 1);

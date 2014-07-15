@@ -1,6 +1,7 @@
 package com.wefika.calendar.manager;
 
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
+
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -12,20 +13,20 @@ public class Day {
 
     private static final DateTimeFormatter mFormatter = DateTimeFormat.forPattern("d");
 
-    @NotNull private final LocalDate mDate;
+    @NonNull private final LocalDate mDate;
     private boolean mToday;
     private boolean mSelected;
     private boolean mEnabled;
     private boolean mCurrent;
 
-    public Day(@NotNull LocalDate date, boolean today) {
+    public Day(@NonNull LocalDate date, boolean today) {
         mDate = date;
         mToday = today;
         mEnabled = true;
         mCurrent = true;
     }
 
-    @NotNull
+    @NonNull
     public LocalDate getDate() {
         return mDate;
     }
@@ -82,7 +83,7 @@ public class Day {
         return result;
     }
 
-    @NotNull
+    @NonNull
     public String getText() {
         return mDate.toString(mFormatter);
     }

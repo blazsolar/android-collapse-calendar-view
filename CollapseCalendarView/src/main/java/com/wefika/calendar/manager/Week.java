@@ -1,7 +1,8 @@
 package com.wefika.calendar.manager;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
@@ -12,10 +13,9 @@ import java.util.List;
  */
 public class Week extends RangeUnit {
 
-    @NotNull
-    private final List<Day> mDays = new ArrayList<>(7);
+    @NonNull private final List<Day> mDays = new ArrayList<>(7);
 
-    public Week(@NotNull LocalDate date, @NotNull LocalDate today, @Nullable LocalDate minDate,
+    public Week(@NonNull LocalDate date, @NonNull LocalDate today, @Nullable LocalDate minDate,
                 @Nullable LocalDate maxDate) {
         super(
                 date.withDayOfWeek(1),
@@ -74,7 +74,7 @@ public class Week extends RangeUnit {
     }
 
     @Override
-    public void deselect(@NotNull LocalDate date) {
+    public void deselect(@NonNull LocalDate date) {
         if (date != null && getFrom().compareTo(date) <= 0 &&
                 getTo().compareTo(date) >= 0) {
             setSelected(false);
@@ -86,7 +86,7 @@ public class Week extends RangeUnit {
     }
 
     @Override
-    public boolean select(@NotNull LocalDate date) {
+    public boolean select(@NonNull LocalDate date) {
         if (date != null && getFrom().compareTo(date) <= 0 &&
                 getTo().compareTo(date) >= 0) {
             setSelected(true);
@@ -100,7 +100,7 @@ public class Week extends RangeUnit {
         }
     }
 
-    @NotNull
+    @NonNull
     public List<Day> getDays() {
         return mDays;
     }
@@ -119,7 +119,7 @@ public class Week extends RangeUnit {
 
     }
 
-    private boolean isDayEnabled(@NotNull LocalDate date) {
+    private boolean isDayEnabled(@NonNull LocalDate date) {
 
         LocalDate minDate = getMinDate();
         if (minDate != null && date.isBefore(minDate)) {
@@ -136,7 +136,7 @@ public class Week extends RangeUnit {
 
     @Nullable
     @Override
-    LocalDate getFirstDateOfCurrentMonth(@NotNull LocalDate currentMonth) {
+    LocalDate getFirstDateOfCurrentMonth(@NonNull LocalDate currentMonth) {
 
         if (currentMonth != null) {
             int year = currentMonth.getYear();

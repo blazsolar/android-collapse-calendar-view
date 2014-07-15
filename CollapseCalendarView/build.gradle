@@ -51,7 +51,6 @@ android {
 }
 
 dependencies {
-    compile 'com.intellij:annotations:+@jar'
     compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'joda-time:joda-time:2.3'
     compile 'com.android.support:support-v4:20.0.0'
