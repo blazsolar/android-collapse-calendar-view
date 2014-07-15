@@ -1,5 +1,6 @@
 package com.wefika.calendar.manager;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -9,14 +10,12 @@ import com.wefika.calendar.models.AbstractViewHolder;
 import com.wefika.calendar.models.SizeViewHolder;
 import com.wefika.calendar.models.StubViewHolder;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * Created by Blaz Solar on 17/04/14.
  */
 public class ProgressManagerImpl extends ProgressManager {
 
-    public ProgressManagerImpl(@NotNull CollapseCalendarView calendarView, int activeWeek, boolean fromMonth) {
+    public ProgressManagerImpl(@NonNull CollapseCalendarView calendarView, int activeWeek, boolean fromMonth) {
         super(calendarView, activeWeek, fromMonth);
 
         if (!fromMonth) {

@@ -1,7 +1,8 @@
 package com.wefika.calendar.manager;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import org.joda.time.LocalDate;
 
 /**
@@ -9,16 +10,16 @@ import org.joda.time.LocalDate;
  */
 public class CalendarManager {
 
-    @NotNull private State mState;
-    @NotNull private RangeUnit mUnit;
-    @NotNull private LocalDate mSelected;
-    @NotNull private final LocalDate mToday;
+    @NonNull private State mState;
+    @NonNull private RangeUnit mUnit;
+    @NonNull private LocalDate mSelected;
+    @NonNull private final LocalDate mToday;
     @Nullable private LocalDate mMinDate;
     @Nullable private LocalDate mMaxDate;
 
     private LocalDate mActiveMonth;
 
-    public CalendarManager(@NotNull LocalDate selected, @NotNull State state, @Nullable LocalDate minDate,
+    public CalendarManager(@NonNull LocalDate selected, @NonNull State state, @Nullable LocalDate minDate,
                            @Nullable LocalDate maxDate) {
         mToday = LocalDate.now();
         mState = state;
@@ -26,7 +27,7 @@ public class CalendarManager {
         init(selected, minDate, maxDate);
     }
 
-    public boolean selectDay(@NotNull LocalDate date) {
+    public boolean selectDay(@NonNull LocalDate date) {
         if (!mSelected.isEqual(date)) {
             mUnit.deselect(mSelected);
             mSelected = date;
@@ -41,12 +42,12 @@ public class CalendarManager {
         }
     }
 
-    @NotNull
+    @NonNull
     public LocalDate getSelectedDay() {
         return mSelected;
     }
 
-    @NotNull
+    @NonNull
     public String getHeaderText() {
         return mUnit.getHeaderText();
     }
@@ -93,7 +94,7 @@ public class CalendarManager {
 
     }
 
-    @NotNull
+    @NonNull
     public State getState() {
         return mState;
     }
@@ -151,7 +152,7 @@ public class CalendarManager {
         mUnit.select(mSelected);
     }
 
-    void setUnit(@NotNull RangeUnit unit) {
+    void setUnit(@NonNull RangeUnit unit) {
         if (unit != null) {
             mUnit = unit;
         }
@@ -171,7 +172,7 @@ public class CalendarManager {
         }
     }
 
-    public void init(@NotNull LocalDate date, @Nullable LocalDate minDate, @Nullable LocalDate maxDate) {
+    public void init(@NonNull LocalDate date, @Nullable LocalDate minDate, @Nullable LocalDate maxDate) {
         mSelected = date;
         setActiveMonth(date);
         mMinDate = minDate;

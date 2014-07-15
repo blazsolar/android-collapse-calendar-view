@@ -1,5 +1,7 @@
 package com.wefika.calendar.manager;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
@@ -7,9 +9,6 @@ import android.view.ViewConfiguration;
 import android.widget.Scroller;
 
 import com.wefika.calendar.CollapseCalendarView;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by Blaz Solar on 17/04/14.
@@ -19,7 +18,7 @@ public class ResizeManager {
     private static final String TAG = "ResizeManager";
 
     /** View to resize */
-    @NotNull private CollapseCalendarView mCalendarView;
+    @NonNull private CollapseCalendarView mCalendarView;
 
     /** Distance in px until drag has started */
     private final int mTouchSlop;
@@ -42,7 +41,7 @@ public class ResizeManager {
 
     @Nullable private ProgressManager mProgressManager;
 
-    public ResizeManager(@NotNull CollapseCalendarView calendarView) {
+    public ResizeManager(@NonNull CollapseCalendarView calendarView) {
 
         mCalendarView = calendarView;
 
@@ -54,7 +53,7 @@ public class ResizeManager {
         mMaxFlingVelocity = viewConfig.getScaledMaximumFlingVelocity();
     }
 
-    public boolean onInterceptTouchEvent(@NotNull MotionEvent ev) {
+    public boolean onInterceptTouchEvent(@NonNull MotionEvent ev) {
         final int action = MotionEventCompat.getActionMasked(ev);
 
         switch (action) {
@@ -75,7 +74,7 @@ public class ResizeManager {
         return false;
     }
 
-    public boolean onTouchEvent(@NotNull MotionEvent event) {
+    public boolean onTouchEvent(@NonNull MotionEvent event) {
         final int action = MotionEventCompat.getActionMasked(event);
 
         if (action == MotionEvent.ACTION_MOVE) {
@@ -105,7 +104,7 @@ public class ResizeManager {
      * Triggered
      * @param event Down event
      */
-    private boolean onDownEvent(@NotNull MotionEvent event) {
+    private boolean onDownEvent(@NonNull MotionEvent event) {
         if (MotionEventCompat.getActionMasked(event) != MotionEvent.ACTION_DOWN) {
             throw new IllegalStateException("Has to be down event!");
         }

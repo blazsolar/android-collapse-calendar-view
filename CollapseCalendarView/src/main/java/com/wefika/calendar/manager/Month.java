@@ -1,7 +1,8 @@
 package com.wefika.calendar.manager;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
@@ -12,10 +13,10 @@ import java.util.List;
  */
 public class Month extends RangeUnit {
 
-    @NotNull private final List<Week> mWeeks = new ArrayList<>();
+    @NonNull private final List<Week> mWeeks = new ArrayList<>();
     private int mSelectedIndex = -1;
 
-    protected Month(@NotNull LocalDate date, @NotNull LocalDate today, @Nullable LocalDate minDate,
+    protected Month(@NonNull LocalDate date, @NonNull LocalDate today, @Nullable LocalDate minDate,
                     @Nullable LocalDate maxDate) {
         super(
                 date.withDayOfMonth(1),
@@ -101,7 +102,7 @@ public class Month extends RangeUnit {
     }
 
     @Override
-    public void deselect(@NotNull LocalDate date) {
+    public void deselect(@NonNull LocalDate date) {
         if (date != null && isSelected() && isInView(date)) {
             for (Week week : mWeeks) {
                 if (week.isSelected() && week.isIn(date)) {
@@ -114,7 +115,7 @@ public class Month extends RangeUnit {
     }
 
     @Override
-    public boolean select(@NotNull LocalDate date) {
+    public boolean select(@NonNull LocalDate date) {
         int cnt = mWeeks.size();
         for (int i = 0; i < cnt; i++) {
             Week week = mWeeks.get(i);
@@ -127,7 +128,7 @@ public class Month extends RangeUnit {
         return false;
     }
 
-    @NotNull
+    @NonNull
     public List<Week> getWeeks() {
         return mWeeks;
     }
@@ -152,7 +153,7 @@ public class Month extends RangeUnit {
 
     @Nullable
     @Override
-    LocalDate getFirstDateOfCurrentMonth(@NotNull LocalDate currentMonth) {
+    LocalDate getFirstDateOfCurrentMonth(@NonNull LocalDate currentMonth) {
 
         if (currentMonth != null) {
             int year = currentMonth.getYear();
