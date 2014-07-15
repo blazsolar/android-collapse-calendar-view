@@ -8,6 +8,10 @@ their app. CollapseCalendarView can be toggled between month and week view.
 [![Coverage Status](https://coveralls.io/repos/blazsolar/android-collapse-calendar-view/badge.png?branch=develop)](https://coveralls.io/r/blazsolar/android-collapse-calendar-view?branch=develop)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.wefika/collapse-calendar-view/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.wefika/collapse-calendar-view)
 
+### Test reports
+All test reports are available on Amazon S3 service at url:
+
+    https://s3-us-west-2.amazonaws.com/android-collapse-calendar-view/artifacts/<travis-build-id>/<travis-job-id>/index.html
 
 Example
 -------
@@ -15,13 +19,32 @@ Example
 
 Source code with examples is included in repository.
 
+Dependencies
+------------
+```groovy
+dependencies {
+    ...
+    compile 'com.wefika:collapse-calendar-view:<version>'
+    ...
+}
+```
+
 Usage
 -----
+First you add view to your layout.
 ```xml
 <com.wefika.calendar.CollapseCalendarView
         android:id="@+id/calendar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+```
+
+and than you initialize it in your code.
+```java
+CalendarManager manager = new CalendarManager(LocalDate.now(), CalendarManager.State.MONTH, LocalDate.now(), LocalDate.now().plusYears(1));
+
+CollapseCalendarView calendarView = (CollapseCalendarView) findViewById(R.id.calendar);
+calendarView.init(manager);
 ```
 
 License
