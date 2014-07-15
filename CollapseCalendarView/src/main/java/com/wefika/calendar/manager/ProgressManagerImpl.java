@@ -19,9 +19,6 @@ public class ProgressManagerImpl extends ProgressManager {
     public ProgressManagerImpl(@NotNull CollapseCalendarView calendarView, int activeWeek, boolean fromMonth) {
         super(calendarView, activeWeek, fromMonth);
 
-        mCalendarView = calendarView;
-        mWeeksView = calendarView.getWeeksView();
-
         if (!fromMonth) {
             initMonthView();
         } else {

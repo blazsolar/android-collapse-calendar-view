@@ -31,6 +31,7 @@ public abstract class ProgressManager {
 
     protected ProgressManager(@NotNull CollapseCalendarView calendarView, int activeWeek, boolean fromMonth) {
         mCalendarView = calendarView;
+        mWeeksView = calendarView.getWeeksView();
         mActiveIndex = activeWeek;
         mFromMonth = fromMonth;
     }
