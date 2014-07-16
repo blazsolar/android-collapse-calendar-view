@@ -1,27 +1,19 @@
 
 package com.wefika.calendar.models;
 
+import android.test.AndroidTestCase;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InOrder;
-import org.mockito.Mockito;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
-@Config(emulateSdk = 18)
-@RunWith(RobolectricTestRunner.class)
-public class SizeViewHolderTest {
+public class SizeViewHolderTest extends AndroidTestCase {
 
     SizeViewHolder mViewHolder;
 
-    @Before
     public void setUp() throws Exception {
 
         mViewHolder = new SizeViewHolder(0, 100);
@@ -31,7 +23,7 @@ public class SizeViewHolderTest {
 
     }
 
-    @Test
+
     public void testGetHeight() throws Exception {
 
         assertEquals(100, mViewHolder.getHeight());
@@ -40,7 +32,7 @@ public class SizeViewHolderTest {
 
     }
 
-    @Test
+
     public void testSetHeight() throws Exception {
 
         mViewHolder.setMinHeight(25);
@@ -52,7 +44,7 @@ public class SizeViewHolderTest {
 
     }
 
-    @Test
+
     public void testOnFinishDone() throws Exception {
 
         View view = mViewHolder.getView();
@@ -66,7 +58,7 @@ public class SizeViewHolderTest {
 
     }
 
-    @Test
+
     public void testOnFinishNotDone() throws Exception {
 
         View view = mViewHolder.getView();
@@ -80,7 +72,7 @@ public class SizeViewHolderTest {
 
     }
 
-    @Test
+
     public void testAnimateStart() throws Exception {
 
         View view = mViewHolder.getView();
@@ -95,7 +87,7 @@ public class SizeViewHolderTest {
 
     }
 
-    @Test
+
     public void testAnimateFinishExpand() throws Exception {
 
         View view = mViewHolder.getView();
@@ -115,7 +107,7 @@ public class SizeViewHolderTest {
 
     }
 
-    @Test
+
     public void testAnimateFinishCollapse() throws Exception {
 
         View view = mViewHolder.getView();
@@ -135,7 +127,7 @@ public class SizeViewHolderTest {
 
     }
 
-    @Test
+
     public void testAnimateDirectFinishExpand() throws Exception {
 
         View view = mViewHolder.getView();
@@ -149,7 +141,7 @@ public class SizeViewHolderTest {
 
     }
 
-    @Test
+
     public void testAnimateDirectFinishedCollapse() throws Exception {
 
         View view = mViewHolder.getView();

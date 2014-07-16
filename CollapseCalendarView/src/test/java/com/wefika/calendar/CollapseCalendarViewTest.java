@@ -1,84 +1,134 @@
 package com.wefika.calendar;
 
-import org.junit.Before;
-import org.junit.Test;
+import android.content.Intent;
+import android.test.ActivityUnitTestCase;
 
-import static org.junit.Assert.*;
+import com.wefika.calendar.manager.CalendarManager;
+import com.wefika.calendar.manager.Week;
+import com.wefika.calendar.mock.MockActivity;
 
-public class CollapseCalendarViewTest {
+import org.joda.time.LocalDate;
+import org.mockito.Mockito;
 
-    @Before
-    public void setUp() throws Exception {
+import static org.mockito.Mockito.*;
+
+public class CollapseCalendarViewTest extends ActivityUnitTestCase<MockActivity> {
+
+    CollapseCalendarView mView;
+
+    public CollapseCalendarViewTest() {
+        super(MockActivity.class);
+    }
+
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+
+        System.setProperty("dexmaker.dexcache", getInstrumentation().getTargetContext().getCacheDir().getPath());
+    }
+
+    public void testInitNull() throws Exception {
+
+        init();
+
+        mView.init(null);
+        assertNull(mView.getManager());
 
     }
 
-    @Test
     public void testInit() throws Exception {
 
-    }
+        init();
 
-    @Test
-    public void testGetManager() throws Exception {
+        CalendarManager manager = mock(CalendarManager.class);
+        when(manager.hasPrev()).thenReturn(false);
+        when(manager.hasNext()).thenReturn(false);
+        when(manager.getHeaderText()).thenReturn("Test");
+        when(manager.getState()).thenReturn(CalendarManager.State.WEEK);
+        when(manager.getUnits()).thenReturn(new Week(LocalDate.now(), LocalDate.now(), null, null));
 
-    }
+        mView.init(manager);
 
-    @Test
-    public void testOnClick() throws Exception {
-
-    }
-
-    @Test
-    public void testDispatchDraw() throws Exception {
-
-    }
-
-    @Test
-    public void testGetState() throws Exception {
+        assertSame(manager, mView.getManager());
+        verify(manager).hasNext();
+        verify(manager).hasPrev();
+        verify(manager).getHeaderText();
+        verify(manager).getState();
+        verify(manager).getUnits();
 
     }
+//
+//
+//    public void testGetManager() throws Exception {
+//
+//    }
+//
+//
+//    public void testOnClick() throws Exception {
+//
+//    }
+//
+//
+//    public void testDispatchDraw() throws Exception {
+//
+//    }
+//
+//
+//    public void testGetState() throws Exception {
+//
+//    }
+//
+//
+//    public void testSetListener() throws Exception {
+//
+//    }
+//
+//
+//
+//    public void testSetTitle() throws Exception {
+//
+//    }
+//
+//
+//
+//    public void testOnInterceptTouchEvent() throws Exception {
+//
+//    }
+//
+//
+//    public void testOnTouchEvent() throws Exception {
+//
+//    }
+//
+//
+//    public void testOnFinishInflate() throws Exception {
+//
+//    }
+//
+//
+//    public void testPopulateLayout() throws Exception {
+//
+//    }
+//
+//
+//    public void testGetWeeksView() throws Exception {
+//
+//    }
+//
+//
+//    public void testGetSelectedDate() throws Exception {
+//
+//    }
+//
+//
+//    public void testOnDetachedFromWindow() throws Exception {
+//
+//    }
 
-    @Test
-    public void testSetListener() throws Exception {
+    private void init() {
 
-    }
-
-    @Test
-    public void testSetTitle() throws Exception {
-
-    }
-
-    @Test
-    public void testOnInterceptTouchEvent() throws Exception {
-
-    }
-
-    @Test
-    public void testOnTouchEvent() throws Exception {
-
-    }
-
-    @Test
-    public void testOnFinishInflate() throws Exception {
-
-    }
-
-    @Test
-    public void testPopulateLayout() throws Exception {
-
-    }
-
-    @Test
-    public void testGetWeeksView() throws Exception {
-
-    }
-
-    @Test
-    public void testGetSelectedDate() throws Exception {
-
-    }
-
-    @Test
-    public void testOnDetachedFromWindow() throws Exception {
+        startActivity(new Intent(getInstrumentation().getTargetContext(), MockActivity.class), null, null);
+        mView = getActivity().getCallendarView();
 
     }
 }

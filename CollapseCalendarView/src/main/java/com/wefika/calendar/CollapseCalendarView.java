@@ -54,6 +54,10 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
 
     @NonNull private ResizeManager mResizeManager;
 
+    public CollapseCalendarView(Context context) {
+        this(context, null);
+    }
+
     public CollapseCalendarView(Context context, AttributeSet attrs) {
         this(context, attrs, R.attr.calendarViewStyle);
     }

@@ -1,6 +1,4 @@
 language: android
-jdk:
-  - oraclejdk7
 
 env:
   - TERM=dump
@@ -14,18 +12,7 @@ env:
     - secure: "lFeUSH2N+gGZyPBqI6LOBMnG8adjonjOohOvrz8nCcUV4Wn7/tHW7i4CzYDp/HUR+s3EBE7QFmBiifM4UTEnSvLpQUkfDS/86wfVlLUTnpiZqUWhLJIQFDZhiNJ3YGH197PG8+OZ1+BGzCFQXI1gt5pNFyMToCeP4cljL9DZdow="
     - secure: "kV99P8eZDRpfErIW+8i+Sz6pqyjsQ4VbtW8L/gg1lWSk/OVCz/BuJBfUpr8SIH/lDP5AsuP4vzWEkNuozbjv4whG3FCek73p1St3lSDZbestqbipshWfitkZwtz8KQnat5VnY35AeWKFstGKsDRtIIoaqLQnaqXqkyOF/DEypU0="
 
-#android:
-#  components:
-#    - build-tools-20.0.0
-#    - extra-android-support
-#    - extra-google-google_play_services
-#    - extra-google-m2repository
-#    - extra-android-m2repository
-#  licenses:
-#    - android-sdk-license-598b93a6
-
 before_install:
-  - git clone git://github.com/blazsolar/coveralls-gradle-plugin.git coveralls-gradle-plugin
   # workaround for travis-ci/travis-ci#2279
   - 'sudo mv /usr/local/android-sdk/tools/android-* /usr/local/bin'
   # Accept all licenses (workaround for travis-ci/travis-ci#2466)
@@ -33,22 +20,16 @@ before_install:
   # Run dinstinct 'android update sdk' commands
   - "android-update-sdk --components='platform-tools,tools' --accept-licenses='.+'"
   - "android-update-sdk --components='build-tools-20.0.0' --accept-licenses='.+'"
-  - "android-update-sdk --components='android-20' --accept-licenses='.+'"
+  - "android-update-sdk --components='android-19' --accept-licenses='.+'"
   - "android-update-sdk --components='extra-android-m2repository,extra-google-m2repository' --accept-licenses='.+'"
-
-install:
-  - cd coveralls-gradle-plugin
-  - gradle install
-  - cd ..
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
 
 before_script:
+  - "gem install fog-json"
   - "gem install travis-artifacts"
-
-script:
-  - gradle test
+  - ./ci/wait_for_emulator
+  - adb shell input keyevent 82 &
 
 after_script:
-  - "travis-artifacts upload --path CollapseCalendarView/build/test-report"
-
-after_success:
-  - gradle jacocoTestReport coveralls
+  - "travis-artifacts upload --path CollapseCalendarView/build/outputs/reports/androidTests/connected/"
