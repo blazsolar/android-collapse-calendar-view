@@ -8,8 +8,6 @@ env:
 env:
   matrix:
     - ANDROID_TARGET=android-18 ANDROID_ABI=armeabi-v7a
-
-env:
   global:
     - "ARTIFACTS_AWS_REGION=us-west-2"
     - "ARTIFACTS_S3_BUCKET=android-collapse-calendar-view"
