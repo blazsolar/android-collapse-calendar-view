@@ -1,15 +1,9 @@
 language: android
-jdk:
-  - oraclejdk7
 
 env:
   - TERM=dump
-
-env:
   matrix:
-    - ANDROID_TARGET=android-18 ANDROID_ABI=armeabi-v7a
-
-env:
+    - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
   global:
     - "ARTIFACTS_AWS_REGION=us-west-2"
     - "ARTIFACTS_S3_BUCKET=android-collapse-calendar-view"
@@ -34,7 +28,7 @@ before_install:
   # Run dinstinct 'android update sdk' commands
   - "android-update-sdk --components='platform-tools,tools' --accept-licenses='.+'"
   - "android-update-sdk --components='build-tools-20.0.0' --accept-licenses='.+'"
-  - "android-update-sdk --components='android-20' --accept-licenses='.+'"
+  - "android-update-sdk --components='android-19' --accept-licenses='.+'"
   - "android-update-sdk --components='extra-android-m2repository,extra-google-m2repository' --accept-licenses='.+'"
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &

@@ -16,9 +16,9 @@ public class MockActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.wefika.calendar.R.layout.test_activity);
+        setContentView(com.wefika.calendar.test.R.layout.test_activity);
 
-        mCallendarView = (CollapseCalendarView) findViewById(com.wefika.calendar.R.id.calendar);
+        mCallendarView = (CollapseCalendarView) findViewById(com.wefika.calendar.test.R.id.calendar);
     }
 
     public CollapseCalendarView getCallendarView() {

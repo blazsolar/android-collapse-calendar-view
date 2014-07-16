@@ -3,7 +3,14 @@ package com.wefika.calendar;
 import android.content.Intent;
 import android.test.ActivityUnitTestCase;
 
+import com.wefika.calendar.manager.CalendarManager;
+import com.wefika.calendar.manager.Week;
 import com.wefika.calendar.mock.MockActivity;
+
+import org.joda.time.LocalDate;
+import org.mockito.Mockito;
+
+import static org.mockito.Mockito.*;
 
 public class CollapseCalendarViewTest extends ActivityUnitTestCase<MockActivity> {
 
@@ -24,30 +31,30 @@ public class CollapseCalendarViewTest extends ActivityUnitTestCase<MockActivity>
 
         init();
 
-//        mView.init(null);
-//        assertNull(mView.getManager());
+        mView.init(null);
+        assertNull(mView.getManager());
 
     }
 
     public void testInit() throws Exception {
-//
-//        init();
-//
-//        CalendarManager manager = mock(CalendarManager.class);
-//        when(manager.hasPrev()).thenReturn(false);
-//        when(manager.hasNext()).thenReturn(false);
-//        when(manager.getHeaderText()).thenReturn("Test");
-//        when(manager.getState()).thenReturn(CalendarManager.State.WEEK);
-//        when(manager.getUnits()).thenReturn(new Week(LocalDate.now(), LocalDate.now(), null, null));
-//
-//        mView.init(manager);
-//
-//        assertSame(manager, mView.getManager());
-//        verify(manager).hasNext();
-//        verify(manager).hasPrev();
-//        verify(manager).getHeaderText();
-//        verify(manager).getState();
-//        verify(manager).getUnits();
+
+        init();
+
+        CalendarManager manager = mock(CalendarManager.class);
+        when(manager.hasPrev()).thenReturn(false);
+        when(manager.hasNext()).thenReturn(false);
+        when(manager.getHeaderText()).thenReturn("Test");
+        when(manager.getState()).thenReturn(CalendarManager.State.WEEK);
+        when(manager.getUnits()).thenReturn(new Week(LocalDate.now(), LocalDate.now(), null, null));
+
+        mView.init(manager);
+
+        assertSame(manager, mView.getManager());
+        verify(manager).hasNext();
+        verify(manager).hasPrev();
+        verify(manager).getHeaderText();
+        verify(manager).getState();
+        verify(manager).getUnits();
 
     }
 //
