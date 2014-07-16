@@ -4,8 +4,8 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath 'org.robolectric:robolectric-gradle-plugin:0.11.+'
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.6.2-SNAPSHOT'
+//        classpath 'org.robolectric:robolectric-gradle-plugin:0.11.+'
+//        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.6.2-SNAPSHOT'
     }
 }
 
