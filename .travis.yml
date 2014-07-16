@@ -36,6 +36,7 @@ before_install:
   - emulator -avd test -no-skin -no-audio -no-window &
 
 before_script:
+  - "gem install fog-json"
   - "gem install travis-artifacts"
   - ./ci/wait_for_emulator
   - adb shell input keyevent 82 &
