@@ -1,33 +1,20 @@
 package com.wefika.calendar.widget;
 
-import android.app.Activity;
-import android.view.LayoutInflater;
+import android.test.AndroidTestCase;
 
 import com.wefika.calendar.R;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-import org.robolectric.shadows.RoboLayoutInflater;
 
-import static org.junit.Assert.*;
-
-@Config(emulateSdk = 18)
-@RunWith(RobolectricTestRunner.class)
-public class DayViewTest {
+public class DayViewTest extends AndroidTestCase {
 
     DayView mView;
 
-    @Before
     public void setUp() throws Exception {
-        mView = new DayView(Robolectric.application);
+        mView = new DayView(getContext());
     }
 
-    @Test
+
     public void testSetCurrent() throws Exception {
 
         assertFalse(mView.isCurrent());
@@ -39,7 +26,7 @@ public class DayViewTest {
 
     }
 
-    @Test
+
     public void testSetCurrentSame() throws Exception {
 
         mView.setCurrent(false);
@@ -49,12 +36,12 @@ public class DayViewTest {
 
     }
 
-    @Test
+
     public void testOnCreateDrawableState() throws Exception {
         assertFalse(ArrayUtils.contains(mView.onCreateDrawableState(0), R.attr.state_current));
     }
 
-    @Test
+
     public void testOnCreateDrawableStateCurrent() throws Exception {
 
         mView.setCurrent(true);

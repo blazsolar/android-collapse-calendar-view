@@ -1,26 +1,20 @@
 package com.wefika.calendar.manager;
 
-import org.apache.commons.lang3.Range;
-import org.joda.time.DateTime;
+import android.test.AndroidTestCase;
+
 import org.joda.time.LocalDate;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InOrder;
-import org.mockito.Mockito;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-@Config(emulateSdk = 18)
-@RunWith(RobolectricTestRunner.class)
-public class CalendarManagerTest {
+public class CalendarManagerTest extends AndroidTestCase {
 
     CalendarManager mCalendarManager;
 
-    @Before
     public void setUp() throws Exception {
 
         mCalendarManager = new CalendarManager(LocalDate.now(),
@@ -29,7 +23,6 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
     public void testSelectDay() throws Exception {
 
         LocalDate select = LocalDate.now().plusDays(1);
@@ -41,7 +34,6 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
     public void testSelectDayOutOfRange() throws Exception {
 
 
@@ -54,7 +46,6 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
     public void testSelectDayWeek() throws Exception {
 
         mCalendarManager.toggleView();
@@ -69,7 +60,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testSelectDaySame() throws Exception {
 
         LocalDate selected = mCalendarManager.getSelectedDay();
@@ -82,7 +73,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testGetHeaderText() throws Exception {
 
         RangeUnit unit = mock(RangeUnit.class);
@@ -95,7 +86,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testSetUnit() throws Exception {
 
         RangeUnit unit = mock(RangeUnit.class);
@@ -105,7 +96,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testSetUnitNull() throws Exception {
 
         CalendarUnit unit = mCalendarManager.getUnits();
@@ -115,7 +106,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testHasNext() throws Exception {
 
         RangeUnit unit = mock(RangeUnit.class);
@@ -130,7 +121,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testHasPrev() throws Exception {
 
         RangeUnit unit = mock(RangeUnit.class);
@@ -145,7 +136,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testNext() throws Exception {
 
         LocalDate from = LocalDate.now().plusWeeks(1);
@@ -168,7 +159,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testPrev() throws Exception {
 
         LocalDate to = LocalDate.now().plusWeeks(1);
@@ -191,7 +182,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testToggleViewMonthInView() throws Exception {
 
         LocalDate selected = mCalendarManager.getSelectedDay();
@@ -211,7 +202,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testToggleViewMonthNotInView() throws Exception {
 
         LocalDate selected = mCalendarManager.getSelectedDay();
@@ -233,7 +224,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testToggleViewWeekInView() throws Exception {
 
         mCalendarManager.toggleView(); // initial state week
@@ -251,7 +242,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testToggleToWeek() throws Exception {
 
         LocalDate from = mCalendarManager.getUnits().getFrom();
@@ -265,7 +256,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testGetWeekInViewInRange() throws Exception {
 
         RangeUnit unit = mock(RangeUnit.class);
@@ -279,7 +270,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testGetWeekInViewAfter() throws Exception {
 
         LocalDate from = mCalendarManager.getSelectedDay().plusDays(1);
@@ -296,7 +287,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testGetWeekInViewBefore() throws Exception {
 
         LocalDate from = mCalendarManager.getSelectedDay().minusDays(1);
@@ -315,7 +306,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testGetWeekOfMonthNotInView() throws Exception {
 
         LocalDate now = LocalDate.now();
@@ -331,7 +322,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testInit() throws Exception {
 
         LocalDate now = LocalDate.now();
@@ -352,7 +343,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testInitWeek() throws Exception {
 
         LocalDate now = LocalDate.now();
@@ -370,7 +361,7 @@ public class CalendarManagerTest {
     }
 
 
-    @Test
+
     public void testSetMinDate() throws Exception {
 
         LocalDate min = LocalDate.now().minusMonths(1);
@@ -380,7 +371,7 @@ public class CalendarManagerTest {
 
     }
 
-    @Test
+
     public void testSetMaxDate() throws Exception {
 
         LocalDate max = LocalDate.now().plusMonths(1);

@@ -27,7 +27,6 @@ env:
 #    - android-sdk-license-598b93a6
 
 before_install:
-  - git clone git://github.com/blazsolar/coveralls-gradle-plugin.git coveralls-gradle-plugin
   # workaround for travis-ci/travis-ci#2279
   - 'sudo mv /usr/local/android-sdk/tools/android-* /usr/local/bin'
   # Accept all licenses (workaround for travis-ci/travis-ci#2466)
@@ -37,20 +36,13 @@ before_install:
   - "android-update-sdk --components='build-tools-20.0.0' --accept-licenses='.+'"
   - "android-update-sdk --components='android-20' --accept-licenses='.+'"
   - "android-update-sdk --components='extra-android-m2repository,extra-google-m2repository' --accept-licenses='.+'"
-
-install:
-  - cd coveralls-gradle-plugin
-  - gradle install
-  - cd ..
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
 
 before_script:
   - "gem install travis-artifacts"
-
-script:
-  - gradle test
+  - ./ci/wait_for_emulator
+  - adb shell input keyevent 82 &
 
 after_script:
-  - "travis-artifacts upload --path CollapseCalendarView/build/test-report"
-
-after_success:
-  - gradle jacocoTestReport coveralls
+  - "travis-artifacts upload --path CollapseCalendarView/build/outputs/reports/androidTests/connected/"

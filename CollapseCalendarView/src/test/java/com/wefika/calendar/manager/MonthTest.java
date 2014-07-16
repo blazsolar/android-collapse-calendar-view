@@ -1,20 +1,17 @@
 package com.wefika.calendar.manager;
 
+import android.test.AndroidTestCase;
+
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
-public class MonthTest {
+public class MonthTest extends AndroidTestCase {
 
     LocalDate mToday;
     Month mMonth;
 
-    @Before
     public void setUp() throws Exception {
 
         mToday = LocalDate.parse("2014-10-08");
@@ -22,12 +19,12 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testHasNextNull() throws Exception {
         assertTrue(mMonth.hasNext());
     }
 
-    @Test
+
     public void testHasNextFalse() throws Exception {
 
         LocalDate max = LocalDate.parse("2014-10-31");
@@ -37,7 +34,7 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testHasNextTrue() throws Exception {
 
         LocalDate max = LocalDate.parse("2014-11-01");
@@ -47,7 +44,7 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testHasNextYear() throws Exception {
 
         LocalDate max = LocalDate.parse("2015-10-08");
@@ -57,12 +54,12 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testHasPrevNull() throws Exception {
         assertTrue(mMonth.hasPrev());
     }
 
-    @Test
+
     public void testHasPreFalse() throws Exception {
 
         LocalDate min = LocalDate.parse("2014-10-01");
@@ -73,7 +70,7 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testHasPrevTrue() throws Exception {
 
         LocalDate min = LocalDate.parse("2014-09-30");
@@ -84,7 +81,7 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testHasPrevYear() throws Exception {
 
         LocalDate min = LocalDate.parse("2013-10-08");
@@ -95,7 +92,7 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testNextFalse() throws Exception {
 
         Month month = new Month(mToday, mToday, null, mToday);
@@ -106,7 +103,7 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testNext() throws Exception {
 
         assertTrue(mMonth.next());
@@ -118,7 +115,7 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testPrevFalse() throws Exception {
 
         Month month = new Month(mToday, mToday, mToday, null);
@@ -131,7 +128,7 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testPrev() throws Exception {
 
         assertTrue(mMonth.prev());
@@ -142,19 +139,19 @@ public class MonthTest {
         assertEquals(LocalDate.parse("2014-09-01"), mMonth.getWeeks().get(0).getFrom());
     }
 
-    @Test
+
     public void testDeselectNull() throws Exception {
         mMonth.deselect(null);
         assertFalse(mMonth.isSelected());
     }
 
-    @Test
+
     public void testDeselectNotSelected() throws Exception {
         mMonth.deselect(mToday);
         assertFalse(mMonth.isSelected());
     }
 
-    @Test
+
     public void testDeselectNotIn() throws Exception {
 
         mMonth.select(mToday);
@@ -174,7 +171,7 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testDeselect() throws Exception {
 
         mMonth.select(mToday);
@@ -190,7 +187,7 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testDeselectNotInWeek() throws Exception {
 
         mMonth.select(mToday);
@@ -210,7 +207,7 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testSelectNull() throws Exception {
 
         assertFalse(mMonth.select(null));
@@ -218,7 +215,7 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testSelectNotIn() throws Exception {
 
         assertFalse(mMonth.select(LocalDate.parse("2014-09-13")));
@@ -230,7 +227,7 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testSelect() throws Exception {
 
         assertTrue(mMonth.select(mToday));
@@ -248,19 +245,19 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testGetSelectedIndexUnselected() throws Exception {
         assertEquals(-1, mMonth.getSelectedIndex());
     }
 
-    @Test
+
     public void testGetSelectedIndexDeselect() throws Exception {
         mMonth.select(mToday);
         mMonth.deselect(mToday);
         assertEquals(-1, mMonth.getSelectedIndex());
     }
 
-    @Test
+
     public void testGetSelectedIndex() throws Exception {
 
         mMonth.select(mToday);
@@ -268,7 +265,7 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testBuild() throws Exception {
 
         mMonth.build();
@@ -288,22 +285,22 @@ public class MonthTest {
 
     }
 
-    @Test
+
     public void testGetFirstDayOfCurrentMonthNull() throws Exception {
         assertNull(mMonth.getFirstDateOfCurrentMonth(null));
     }
 
-    @Test
+
     public void testGetFirstDayOfCurrentMonthNotIn() throws Exception {
         assertNull(mMonth.getFirstDateOfCurrentMonth(LocalDate.parse("2014-09-30")));
     }
 
-    @Test
+
     public void testGetFirstDayOfCurrentMonthNotInYear() throws Exception {
         assertNull(mMonth.getFirstDateOfCurrentMonth(LocalDate.parse("2015-10-13")));
     }
 
-    @Test
+
     public void testGetFirstDateOfCurrentMonth() throws Exception {
         assertEquals(LocalDate.parse("2014-10-01"), mMonth.getFirstDateOfCurrentMonth(mToday));
     }

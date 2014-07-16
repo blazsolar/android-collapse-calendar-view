@@ -1,18 +1,14 @@
 package com.wefika.calendar.manager;
 
-import org.apache.tools.ant.taskdefs.Local;
+import android.test.AndroidTestCase;
+
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
-import org.junit.Before;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-public class CalendarUnitTest {
+public class CalendarUnitTest extends AndroidTestCase {
 
     CalendarUnit mUnit;
 
-    @Before
     public void setUp() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -20,7 +16,7 @@ public class CalendarUnitTest {
 
     }
 
-    @Test
+
     public void testInit() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -31,7 +27,7 @@ public class CalendarUnitTest {
 
     }
 
-    @Test
+
     public void testSetDate() throws Exception {
 
         LocalDate nextWeek = LocalDate.now().plusWeeks(1);
@@ -44,7 +40,7 @@ public class CalendarUnitTest {
 
     }
 
-    @Test
+
     public void testSetSelected() throws Exception {
 
         assertFalse(mUnit.isSelected());
@@ -55,7 +51,7 @@ public class CalendarUnitTest {
 
     }
 
-    @Test
+
     public void testIsIn() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -66,7 +62,7 @@ public class CalendarUnitTest {
 
     }
 
-    @Test
+
     public void testIsInBefore() throws Exception {
 
         LocalDate prevWeek = LocalDate.now().minusWeeks(1);
@@ -74,7 +70,7 @@ public class CalendarUnitTest {
 
     }
 
-    @Test
+
     public void testIsInAfter() throws Exception {
 
         LocalDate nextWeek = LocalDate.now().plusWeeks(1);
@@ -82,7 +78,7 @@ public class CalendarUnitTest {
 
     }
 
-    @Test
+
     public void testIsInView() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -93,7 +89,7 @@ public class CalendarUnitTest {
 
     }
 
-    @Test
+
     public void testIsInViewBefore() throws Exception {
 
         LocalDate prevWeek = LocalDate.now().minusWeeks(1);
@@ -101,7 +97,7 @@ public class CalendarUnitTest {
 
     }
 
-    @Test
+
     public void testIsInViewAfter() throws Exception {
 
         LocalDate nextWeek = LocalDate.now().plusWeeks(1);
@@ -109,12 +105,12 @@ public class CalendarUnitTest {
 
     }
 
-    @Test
+
     public void testEqualsNull() throws Exception {
         assertFalse(mUnit.equals(null));
     }
 
-    @Test
+
     public void testEqualsSelf() throws Exception {
         assertTrue(mUnit.equals(mUnit));
     }
