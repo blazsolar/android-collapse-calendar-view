@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -95,16 +96,17 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-
+        Log.d(TAG, "On click");
         if (mManager != null) {
-
             int id = v.getId();
             if (id == R.id.prev) {
                 if (mManager.prev()) {
                     populateLayout();
                 }
             } else if (id == R.id.next) {
+                Log.d(TAG, "next");
                 if (mManager.next()) {
+                    Log.d(TAG, "populate");
                     populateLayout();
                 }
             }
@@ -132,6 +134,9 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
         mListener = listener;
     }
 
+    /**
+     * @deprecated This will be removed
+     */
     public void setTitle(@Nullable String text) {
         if (StringUtils.isEmpty(text)) {
             mHeader.setVisibility(View.VISIBLE);
