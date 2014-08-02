@@ -24,10 +24,12 @@ before_install:
   - emulator -avd test -no-skin -no-audio -no-window &
 
 before_script:
-  - "gem install fog-json"
-  - "gem install travis-artifacts"
+#  - "gem install fog-json"
+#  - "gem install travis-artifacts"
   - ./ci/wait_for_emulator
   - adb shell input keyevent 82 &
 
 after_script:
-  - "travis-artifacts upload --path CollapseCalendarView/build/outputs/reports/androidTests/connected/"
+  - artifacts upload \
+      --target-paths "artifacts/$TRAVIS_REPO_SLUG/$TRAVIS_BUILD_NUMBER/$TRAVIS_JOB_NUMBER:artifacts/$TRAVIS_REPO_SLUG/$TRAVIS_COMMIT" \
+#  - "travis-artifacts upload --path CollapseCalendarView/build/outputs/reports/androidTests/connected/"
