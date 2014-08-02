@@ -13,11 +13,11 @@ if (isReleaseBuild()) {
 afterEvaluate { project ->
 
     if (!project.hasProperty("nexusUsername")) {
-        nexusUsername = "";
+        ext.nexusUsername = "";
     }
 
     if (!project.hasProperty("nexusPassword")) {
-        nexusPassword = "";
+        ext.nexusPassword = "";
     }
 
     uploadArchives {
