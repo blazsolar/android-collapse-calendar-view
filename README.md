@@ -14,7 +14,7 @@ All test reports are available on Amazon S3 service at url:
 
 Example
 -------
-![Example screenshot](https://raw2.github.com/blazsolar/android-collapse-calendar-view/master/images/preview.gif)
+![Example screenshot](https://raw.githubusercontent.com/blazsolar/android-collapse-calendar-view/develop/images/preview.gif)
 
 Source code with examples is included in repository.
 
