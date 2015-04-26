@@ -21,7 +21,6 @@ public class Month extends RangeUnit {
         super(
                 date.withDayOfMonth(1),
                 date.withDayOfMonth(date.dayOfMonth().getMaximumValue()),
-                "MMMM yyyy",
                 today,
                 minDate,
                 maxDate
@@ -99,6 +98,10 @@ public class Month extends RangeUnit {
             return false;
         }
 
+    }
+
+    @Override public int getType() {
+        return TYPE_MONTH;
     }
 
     @Override

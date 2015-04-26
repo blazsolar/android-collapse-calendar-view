@@ -3,27 +3,34 @@ package com.wefika.calendar.manager;
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InOrder;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CalendarManagerTest {
 
+    Formatter formatter;
     CalendarManager mCalendarManager;
 
     @Before
     public void setUp() throws Exception {
 
+        formatter = mock(Formatter.class);
+
         mCalendarManager = new CalendarManager(LocalDate.now(),
                 CalendarManager.State.MONTH, LocalDate.now().minusDays(1),
-                LocalDate.now().plusMonths(3));
+                LocalDate.now().plusMonths(3), formatter);
 
     }
 
@@ -83,13 +90,17 @@ public class CalendarManagerTest {
     @Test
     public void testGetHeaderText() throws Exception {
 
+        LocalDate date = LocalDate.now();
         RangeUnit unit = mock(RangeUnit.class);
-        when(unit.getHeaderText()).thenReturn("header");
+        when(unit.getType()).thenReturn(CalendarUnit.TYPE_WEEK);
+        when(unit.getFrom()).thenReturn(date);
+        when(unit.getTo()).thenReturn(date);
+
+        when(formatter.getHeaderText(eq(CalendarUnit.TYPE_WEEK), eq(date), eq(date))).thenReturn("header");
         mCalendarManager.setUnit(unit);
 
         String header = mCalendarManager.getHeaderText();
         assertEquals("header", header);
-        verify(unit).getHeaderText();
 
     }
 

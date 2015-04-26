@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.wefika.calendar.manager.CalendarManager;
 import com.wefika.calendar.manager.Day;
+import com.wefika.calendar.manager.Formatter;
 import com.wefika.calendar.manager.Month;
 import com.wefika.calendar.manager.ResizeManager;
 import com.wefika.calendar.manager.Week;
@@ -24,8 +25,6 @@ import com.wefika.calendar.widget.WeekView;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -54,6 +53,8 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
     @NonNull private LinearLayout mHeader;
 
     @NonNull private ResizeManager mResizeManager;
+
+    private boolean initialized;
 
     public CollapseCalendarView(Context context) {
         this(context, null);
@@ -175,22 +176,29 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
         mPrev.setOnClickListener(this);
         mNext.setOnClickListener(this);
 
-        populateDays();
         populateLayout();
     }
 
     private void populateDays() {
 
-        DateTimeFormatter formatter = DateTimeFormat.forPattern("E");
+        if (!initialized) {
+            CalendarManager manager = getManager();
 
-        LinearLayout layout = (LinearLayout) findViewById(R.id.days);
+            if (manager != null) {
+                Formatter formatter = manager.getFormatter();
 
-        LocalDate date = LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY);
-        for (int i = 0; i < 7; i++) {
-            TextView textView = (TextView) layout.getChildAt(i);
-            textView.setText(date.toString(formatter));
+                LinearLayout layout = (LinearLayout) findViewById(R.id.days);
 
-            date = date.plusDays(1);
+                LocalDate date = LocalDate.now().withDayOfWeek(DateTimeConstants.MONDAY);
+                for (int i = 0; i < 7; i++) {
+                    TextView textView = (TextView) layout.getChildAt(i);
+                    textView.setText(formatter.getDayName(date));
+
+                    date = date.plusDays(1);
+                }
+
+                initialized = true;
+            }
         }
 
     }
@@ -198,6 +206,9 @@ public class CollapseCalendarView extends LinearLayout implements View.OnClickLi
     public void populateLayout() {
 
         if (mManager != null) {
+
+            populateDays();
+
             mPrev.setEnabled(mManager.hasPrev());
             mNext.setEnabled(mManager.hasNext());
 

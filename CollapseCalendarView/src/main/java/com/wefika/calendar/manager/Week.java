@@ -20,7 +20,6 @@ public class Week extends RangeUnit {
         super(
                 date.withDayOfWeek(1),
                 date.withDayOfWeek(7),
-                "'week' w",
                 today,
                 minDate,
                 maxDate
@@ -71,6 +70,10 @@ public class Week extends RangeUnit {
         } else {
             return false;
         }
+    }
+
+    @Override public int getType() {
+        return TYPE_WEEK;
     }
 
     @Override

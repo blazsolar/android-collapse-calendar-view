@@ -15,9 +15,9 @@ public abstract class RangeUnit extends CalendarUnit {
     @Nullable private LocalDate mMinDate;
     @Nullable private LocalDate mMaxDate;
 
-    protected RangeUnit(@NonNull LocalDate from, @NonNull LocalDate to, @NonNull String headerPattern,
-                        @NonNull LocalDate today, @Nullable LocalDate minDate, @Nullable LocalDate maxDate) {
-        super(from, to, headerPattern, today);
+    protected RangeUnit(@NonNull LocalDate from, @NonNull LocalDate to, @NonNull LocalDate today,
+            @Nullable LocalDate minDate, @Nullable LocalDate maxDate) {
+        super(from, to, today);
 
         if (minDate != null && maxDate != null && minDate.isAfter(maxDate)) {
             throw new IllegalArgumentException("Min date should be before max date");

@@ -16,13 +16,25 @@ public class CalendarManager {
     @NonNull private final LocalDate mToday;
     @Nullable private LocalDate mMinDate;
     @Nullable private LocalDate mMaxDate;
+    @NonNull private Formatter formatter;
 
     private LocalDate mActiveMonth;
 
     public CalendarManager(@NonNull LocalDate selected, @NonNull State state, @Nullable LocalDate minDate,
                            @Nullable LocalDate maxDate) {
+        this(selected, state, minDate, maxDate, null);
+    }
+
+    public CalendarManager(@NonNull LocalDate selected, @NonNull State state, @Nullable LocalDate minDate,
+            @Nullable LocalDate maxDate, @Nullable Formatter formatter) {
         mToday = LocalDate.now();
         mState = state;
+
+        if (formatter == null) {
+            this.formatter = new DefaultFormatter();
+        } else {
+            this.formatter = formatter;
+        }
 
         init(selected, minDate, maxDate);
     }
@@ -49,7 +61,7 @@ public class CalendarManager {
 
     @NonNull
     public String getHeaderText() {
-        return mUnit.getHeaderText();
+        return formatter.getHeaderText(mUnit.getType(), mUnit.getFrom(), mUnit.getTo());
     }
 
     public boolean hasNext() {
@@ -197,6 +209,10 @@ public class CalendarManager {
 
     public void setMaxDate(@Nullable LocalDate maxDate) {
         mMaxDate = maxDate;
+    }
+
+    @NonNull public Formatter getFormatter() {
+        return formatter;
     }
 
     public enum State {
