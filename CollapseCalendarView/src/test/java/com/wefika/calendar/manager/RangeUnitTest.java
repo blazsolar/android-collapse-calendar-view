@@ -1,21 +1,26 @@
 package com.wefika.calendar.manager;
 
-import android.test.AndroidTestCase;
-
 import org.joda.time.DateTimeConstants;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
+import org.junit.Before;
+import org.junit.Test;
 
-public class RangeUnitTest extends AndroidTestCase {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
+
+public class RangeUnitTest {
 
     RangeUnit mRangeUnit;
 
+    @Before
     public void setUp() throws Exception {
         LocalDate today = LocalDate.now();
         mRangeUnit = new Month(today, today, today.minusMonths(2), today.plusMonths(2));
     }
 
-
+    @Test
     public void testInit() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -25,7 +30,7 @@ public class RangeUnitTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testIllegalRange() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -39,7 +44,7 @@ public class RangeUnitTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testMinMaxNull() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -50,7 +55,7 @@ public class RangeUnitTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testGetFirstWeekNull() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -60,7 +65,7 @@ public class RangeUnitTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testGetFirstWeekCurrentMonth() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -72,7 +77,7 @@ public class RangeUnitTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testGetFirstWeekMinDate() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -87,7 +92,7 @@ public class RangeUnitTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testGetFirstWeekBetween() throws Exception {
 
         LocalDate date = LocalDate.parse("2014-08-01");
@@ -98,7 +103,7 @@ public class RangeUnitTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testGetFirstWeekOutOfView() throws Exception {
 
         LocalDate date = LocalDate.parse("2014-08-01");
@@ -109,7 +114,7 @@ public class RangeUnitTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testGetFirstWeekDifferentMonth() throws Exception {
 
         LocalDate date = LocalDate.parse("2014-08-01");
@@ -120,7 +125,7 @@ public class RangeUnitTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testGetFirstEnabledNullMin() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -130,7 +135,7 @@ public class RangeUnitTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testGetFirstEnabledBeforeMin() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -140,7 +145,7 @@ public class RangeUnitTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testGetFirstEnabled() throws Exception {
         assertEquals(mRangeUnit.getFrom(), mRangeUnit.getFirstEnabled());
     }

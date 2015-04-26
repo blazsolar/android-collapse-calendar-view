@@ -1,26 +1,26 @@
 package com.wefika.calendar.models;
 
-import android.test.AndroidTestCase;
 import android.view.View;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
-public class AbstractViewHolderTest extends AndroidTestCase {
+public class AbstractViewHolderTest {
 
     AbstractViewHolder mViewHolder;
 
+    @Before
     public void setUp() throws Exception {
 
         mViewHolder = new SizeViewHolder(0, 10);
 
     }
 
-
-    public void testAnimate() throws Exception {
-
-    }
-
-
+    @Test
     public void testSetView() throws Exception {
 
         View view = mock(View.class);
@@ -30,7 +30,7 @@ public class AbstractViewHolderTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testSetDelay() throws Exception {
 
         float delay = 20;
@@ -40,7 +40,7 @@ public class AbstractViewHolderTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testSetDuration() throws Exception {
 
         float duration = 200;
@@ -50,28 +50,4 @@ public class AbstractViewHolderTest extends AndroidTestCase {
 
     }
 
-
-    public void testOnFinish() throws Exception {
-
-    }
-
-
-    public void testGetEnd() throws Exception {
-
-    }
-
-
-    public void testShouldAnimate() throws Exception {
-
-    }
-
-
-    public void testOnAnimate() throws Exception {
-
-    }
-
-
-    public void testGetRelativeTime() throws Exception {
-
-    }
 }

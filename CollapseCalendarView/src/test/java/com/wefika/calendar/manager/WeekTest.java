@@ -1,16 +1,25 @@
 package com.wefika.calendar.manager;
 
-import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.SmallTest;
 
 import org.joda.time.DateTimeConstants;
 import org.joda.time.LocalDate;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.List;
 
-public class WeekTest extends AndroidTestCase {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+@SmallTest
+public class WeekTest {
 
     Week mWeek;
 
+    @Before
     public void setUp() throws Exception {
 
         LocalDate today = LocalDate.parse("2014-08-1");
@@ -18,12 +27,12 @@ public class WeekTest extends AndroidTestCase {
         mWeek = new Week(today, today, null, null);
     }
 
-
+    @Test
     public void testHasNextNull() throws Exception {
         assertTrue(mWeek.hasNext());
     }
 
-
+    @Test
     public void testHasNextTrue() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -33,7 +42,7 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testHasNextFalse() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -43,12 +52,12 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testHasPrevNull() throws Exception {
         assertTrue(mWeek.hasPrev());
     }
 
-
+    @Test
     public void testHasPrevTrue() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -58,7 +67,7 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testHasPrevFalse() throws Exception {
 
         LocalDate today = LocalDate.now();
@@ -68,7 +77,7 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testNext() throws Exception {
 
         LocalDate nextWeek = LocalDate.parse("2014-08-04");
@@ -84,7 +93,7 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testNextFalse() throws Exception {
 
         LocalDate today = LocalDate.parse("2014-08-01");
@@ -103,7 +112,7 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testPrev() throws Exception {
 
         LocalDate start = LocalDate.parse("2014-07-21");
@@ -119,7 +128,7 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testPrevFalse() throws Exception {
 
         LocalDate today = LocalDate.parse("2014-08-01");
@@ -138,7 +147,7 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testDeselectNull() throws Exception {
 
         mWeek.deselect(null);
@@ -146,7 +155,7 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testDeselectNotIn() throws Exception {
 
         mWeek.select(LocalDate.parse("2014-08-01"));
@@ -156,7 +165,7 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testDeselect() throws Exception {
 
         mWeek.select(LocalDate.parse("2014-08-01"));
@@ -170,14 +179,14 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testSelectNull() throws Exception {
 
         assertFalse(mWeek.select(null));
 
     }
 
-
+    @Test
     public void testSelectNotIn() throws Exception {
 
         assertFalse(mWeek.select(LocalDate.parse("2014-08-14")));
@@ -189,7 +198,7 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testSelect() throws Exception {
 
         assertTrue(mWeek.select(LocalDate.parse("2014-07-31")));
@@ -207,7 +216,7 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testGetDays() throws Exception {
 
         List<Day> days = mWeek.getDays();
@@ -231,7 +240,7 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testBuild() throws Exception {
 
         LocalDate today = LocalDate.parse("2014-08-01");
@@ -265,27 +274,27 @@ public class WeekTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testGetFirstDateOfCurrentMonthNull() throws Exception {
         assertNull(mWeek.getFirstDateOfCurrentMonth(null));
     }
 
-
+    @Test
     public void testGetFirstDateOfCurrentMonthNotIn() throws Exception {
         assertNull(mWeek.getFirstDateOfCurrentMonth(LocalDate.parse("2014-09-01")));
     }
 
-
+    @Test
     public void testGetFirstDateOfCurrentMonthYear() throws Exception {
         assertNull(mWeek.getFirstDateOfCurrentMonth(LocalDate.parse("2015-08-01")));
     }
 
-
+    @Test
     public void testGetFirstDateOfCurrentMonth() throws Exception {
         assertEquals(LocalDate.parse("2014-08-01"), mWeek.getFirstDateOfCurrentMonth(LocalDate.parse("2014-08-23")));
     }
 
-
+    @Test
     public void testHeaderText() throws Exception {
         assertEquals("week 31", mWeek.getHeaderText());
     }

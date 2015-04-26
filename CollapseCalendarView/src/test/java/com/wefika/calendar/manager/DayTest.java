@@ -1,14 +1,22 @@
 package com.wefika.calendar.manager;
 
-import android.test.AndroidTestCase;
+import android.test.suitebuilder.annotation.SmallTest;
 
 import org.joda.time.LocalDate;
+import org.junit.Before;
+import org.junit.Test;
 
-public class DayTest extends AndroidTestCase {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+@SmallTest
+public class DayTest {
 
     LocalDate mToday;
     Day mDay;
 
+    @Before
     public void setUp() throws Exception {
 
         mToday = LocalDate.parse("2014-07-05");
@@ -16,7 +24,7 @@ public class DayTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testInit() throws Exception {
 
         assertEquals(mToday, mDay.getDate());
@@ -26,7 +34,7 @@ public class DayTest extends AndroidTestCase {
         assertFalse(mDay.isSelected());
     }
 
-
+    @Test
     public void testSetEnabled() throws Exception {
 
         mDay.setEnabled(false);
@@ -34,7 +42,7 @@ public class DayTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testSetSelected() throws Exception {
 
         mDay.setSelected(true);
@@ -42,7 +50,7 @@ public class DayTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testSetCurrent() throws Exception {
 
         mDay.setCurrent(false);
@@ -50,18 +58,18 @@ public class DayTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testEqualsNull() throws Exception {
         assertFalse(mDay.equals(null));
     }
 
 
-
+    @Test
     public void testEqualsSame() throws Exception {
         assertTrue(mDay.equals(mDay));
     }
 
-
+    @Test
     public void testEquals() throws Exception {
         Day day = new Day(mToday, true);
         assertTrue(mDay.equals(day));
@@ -70,8 +78,9 @@ public class DayTest extends AndroidTestCase {
         assertEquals(day.hashCode(), mDay.hashCode());
     }
 
-
+    @Test
     public void testGetText() throws Exception {
         assertEquals("5", mDay.getText());
     }
+
 }

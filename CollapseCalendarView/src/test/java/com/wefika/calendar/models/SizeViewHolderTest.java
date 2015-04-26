@@ -1,19 +1,23 @@
 
 package com.wefika.calendar.models;
 
-import android.test.AndroidTestCase;
 import android.view.View;
 import android.view.ViewGroup;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class SizeViewHolderTest extends AndroidTestCase {
+public class SizeViewHolderTest {
 
     SizeViewHolder mViewHolder;
 
+    @Before
     public void setUp() throws Exception {
 
         mViewHolder = new SizeViewHolder(0, 100);
@@ -23,7 +27,7 @@ public class SizeViewHolderTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testGetHeight() throws Exception {
 
         assertEquals(100, mViewHolder.getHeight());
@@ -32,7 +36,7 @@ public class SizeViewHolderTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testSetHeight() throws Exception {
 
         mViewHolder.setMinHeight(25);
@@ -44,7 +48,7 @@ public class SizeViewHolderTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testOnFinishDone() throws Exception {
 
         View view = mViewHolder.getView();
@@ -58,7 +62,7 @@ public class SizeViewHolderTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testOnFinishNotDone() throws Exception {
 
         View view = mViewHolder.getView();
@@ -72,7 +76,7 @@ public class SizeViewHolderTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testAnimateStart() throws Exception {
 
         View view = mViewHolder.getView();
@@ -87,7 +91,7 @@ public class SizeViewHolderTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testAnimateFinishExpand() throws Exception {
 
         View view = mViewHolder.getView();
@@ -107,7 +111,7 @@ public class SizeViewHolderTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testAnimateFinishCollapse() throws Exception {
 
         View view = mViewHolder.getView();
@@ -127,7 +131,7 @@ public class SizeViewHolderTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testAnimateDirectFinishExpand() throws Exception {
 
         View view = mViewHolder.getView();
@@ -141,7 +145,7 @@ public class SizeViewHolderTest extends AndroidTestCase {
 
     }
 
-
+    @Test
     public void testAnimateDirectFinishedCollapse() throws Exception {
 
         View view = mViewHolder.getView();
