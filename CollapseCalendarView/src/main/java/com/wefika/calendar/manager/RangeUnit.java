@@ -36,6 +36,25 @@ public abstract class RangeUnit extends CalendarUnit {
         return mMaxDate;
     }
 
+    @Override public boolean hasDate(@NonNull LocalDate date) {
+
+        boolean min = true;
+        boolean max = true;
+
+        LocalDate maxDate = getMaxDate();
+        if (maxDate != null) {
+            max = !date.isAfter(maxDate);
+        }
+
+        LocalDate minDate = getMinDate();
+        if (minDate != null) {
+            min = !date.isBefore(minDate);
+        }
+
+        return min && max;
+
+    }
+
     /**
      *
      *

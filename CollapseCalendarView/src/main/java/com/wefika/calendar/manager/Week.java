@@ -48,6 +48,17 @@ public class Week extends RangeUnit {
         }
     }
 
+    @Override public boolean setPeriod(@NonNull LocalDate date) {
+        if (hasDate(date)) {
+            setFrom(date.withDayOfWeek(1));
+            setTo(date.withDayOfWeek(7));
+            build();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     @Override
     public boolean next() {
         if (hasNext()) {

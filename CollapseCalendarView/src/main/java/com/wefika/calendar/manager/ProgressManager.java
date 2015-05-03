@@ -22,6 +22,8 @@ public abstract class ProgressManager {
     protected SizeViewHolder mCalendarHolder;
     protected SizeViewHolder mWeeksHolder;
 
+    private OnInitListener listener;
+
     final int mActiveIndex;
 
     private boolean mInitialized = false;
@@ -57,12 +59,20 @@ public abstract class ProgressManager {
 
     }
 
+    public void setListener(OnInitListener listener) {
+        this.listener = listener;
+    }
+
     public boolean isInitialized() {
         return mInitialized;
     }
 
     void setInitialized(boolean initialized) {
         mInitialized = initialized;
+
+        if (listener != null && initialized) {
+            listener.onInit();
+        }
     }
 
     public int getCurrentHeight() {
@@ -95,6 +105,10 @@ public abstract class ProgressManager {
             return (int) Math.max(0, Math.min(mCalendarHolder.getHeight(), delta));
         }
 
+    }
+
+    interface OnInitListener {
+        void onInit();
     }
 
 }

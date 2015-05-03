@@ -39,8 +39,20 @@ public class CalendarManager {
         init(selected, minDate, maxDate);
     }
 
+    public boolean selectPeriod(@NonNull LocalDate date) {
+
+        if (!mUnit.isIn(date) && mUnit.setPeriod(date)) {
+            mUnit.select(mSelected);
+            setActiveMonth(mUnit.getFrom());
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     public boolean selectDay(@NonNull LocalDate date) {
-        if (!mSelected.isEqual(date)) {
+        if (!mSelected.isEqual(date) && mUnit.hasDate(date)) {
             mUnit.deselect(mSelected);
             mSelected = date;
             mUnit.select(mSelected);
@@ -74,22 +86,27 @@ public class CalendarManager {
 
     public boolean next() {
 
-        boolean next = mUnit.next();
-        mUnit.select(mSelected);
+        if (mUnit.next()) {
+            mUnit.select(mSelected);
 
-        setActiveMonth(mUnit.getFrom());
-
-        return next;
+            setActiveMonth(mUnit.getFrom());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean prev() {
 
-        boolean prev = mUnit.prev();
-        mUnit.select(mSelected);
+        if (mUnit.prev()) {
+            mUnit.select(mSelected);
 
-        setActiveMonth(mUnit.getTo());
+            setActiveMonth(mUnit.getTo());
+            return true;
+        } else {
+            return false;
+        }
 
-        return prev;
     }
 
     /**
