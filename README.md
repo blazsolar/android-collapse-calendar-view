@@ -7,11 +7,6 @@ their app. CollapseCalendarView can be toggled between month and week view.
 [![Build Status](https://travis-ci.org/blazsolar/android-collapse-calendar-view.svg?branch=develop)](https://travis-ci.org/blazsolar/android-collapse-calendar-view)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.wefika/collapse-calendar-view/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.wefika/collapse-calendar-view)
 
-### Test reports
-All test reports are available on Amazon S3 service at url:
-
-    https://s3-us-west-2.amazonaws.com/android-collapse-calendar-view/artifacts/<travis-build-id>/<travis-job-id>/index.html
-
 Example
 -------
 ![Example screenshot](https://raw.githubusercontent.com/blazsolar/android-collapse-calendar-view/develop/images/preview.gif)
