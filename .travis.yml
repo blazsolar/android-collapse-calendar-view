@@ -17,6 +17,7 @@ android:
     - build-tools-22.0.1
     - extra-android-m2repository
     - extra-google-m2repository
+    - android-22
 
 before_install:
   # Emulator
@@ -24,10 +25,6 @@ before_install:
   - emulator -avd test -no-skin -no-audio -no-window &
 
 before_script:
-  - "gem install fog-json"
-  - "gem install travis-artifacts"
+  - ./gradlew dependencies
   - ./ci/wait_for_emulator
   - adb shell input keyevent 82 &
-
-after_script:
-  - "travis-artifacts upload --path CollapseCalendarView/build/outputs/reports/androidTests/connected/"
