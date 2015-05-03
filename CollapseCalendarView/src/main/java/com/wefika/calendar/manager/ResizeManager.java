@@ -9,6 +9,7 @@ import android.view.ViewConfiguration;
 import android.widget.Scroller;
 
 import com.wefika.calendar.CollapseCalendarView;
+import com.wefika.calendar.manager.ProgressManager.OnInitListener;
 
 /**
  * Created by Blaz Solar on 17/04/14.
@@ -146,25 +147,11 @@ public class ResizeManager {
 
         final int yDIff = calculateDistance(ev);
 
-        CalendarManager manager = mCalendarView.getManager();
-        CalendarManager.State state = manager.getState();
-
         if (Math.abs(yDIff) > mTouchSlop) { // FIXME this should happen only if dragging int right direction
             mState = State.DRAGGING;
             mDragStartY = ev.getY();
 
-            if (mProgressManager == null) {
-
-                int weekOfMonth = manager.getWeekOfMonth();
-
-                if (state == CalendarManager.State.WEEK) { // always animate in month view
-                    manager.toggleView();
-                    mCalendarView.populateLayout();
-                }
-
-                mProgressManager = new ProgressManagerImpl(mCalendarView, weekOfMonth,
-                        state == CalendarManager.State.MONTH);
-            }
+            startResizing();
 
             return true;
         }
@@ -172,13 +159,33 @@ public class ResizeManager {
         return false;
     }
 
+    private void startResizing() {
+
+        if (mProgressManager == null) {
+
+            CalendarManager manager = mCalendarView.getManager();
+            CalendarManager.State state = manager.getState();
+
+            int weekOfMonth = manager.getWeekOfMonth();
+
+            if (state == CalendarManager.State.WEEK) { // always animate in month view
+                manager.toggleView();
+                mCalendarView.populateLayout();
+            }
+
+            mProgressManager = new ProgressManagerImpl(mCalendarView, weekOfMonth,
+                    state == CalendarManager.State.MONTH);
+        }
+
+    }
+
     private void finishMotionEvent() {
         if (mProgressManager != null && mProgressManager.isInitialized()) {
-            startScolling();
+            startScrolling();
         }
     }
 
-    private void startScolling() {
+    private void startScrolling() {
 
         mVelocityTracker.computeCurrentVelocity(1000, mMaxFlingVelocity);
         int velocity = (int) mVelocityTracker.getYVelocity();
@@ -236,6 +243,52 @@ public class ResizeManager {
             mProgressManager.finish(position > 0);
             mProgressManager = null;
         }
+
+    }
+
+    public void toggle() {
+
+        if (mProgressManager == null) {
+            startResizing();
+        }
+
+        if (!mScroller.isFinished()) {
+            mScroller.forceFinished(true);
+        }
+
+        if (!mProgressManager.isInitialized()) {
+            mProgressManager.setListener(new OnInitListener() {
+                @Override public void onInit() {
+                    testFinish();
+                    mProgressManager.setListener(null);
+                }
+            });
+        } else {
+            testFinish();
+        }
+
+
+
+    }
+
+    private void testFinish() {
+
+        if (!mScroller.isFinished()) {
+            mScroller.forceFinished(true);
+        }
+
+        int progress = mProgressManager.getCurrentHeight();
+        int end = 0;
+        int endSize = mProgressManager.getEndSize();
+        if (endSize / 2 > progress) {
+            end += endSize;
+        }
+        end -= progress;
+
+        mScroller.startScroll(0, progress, 0, end);
+        mCalendarView.postInvalidate();
+
+        mState = State.SETTLING;
 
     }
 

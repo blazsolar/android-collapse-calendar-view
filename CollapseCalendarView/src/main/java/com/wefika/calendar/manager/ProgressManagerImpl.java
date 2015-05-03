@@ -78,6 +78,7 @@ public class ProgressManagerImpl extends ProgressManager {
                 initializeChildren();
 
                 setInitialized(true);
+                apply(0);
 
                 return false;
             }
@@ -110,6 +111,7 @@ public class ProgressManagerImpl extends ProgressManager {
                 mWeeksView.getLayoutParams().height = mCalendarHolder.getMaxHeight();
 
                 setInitialized(true);
+                apply(1);
 
                 return false;
             }

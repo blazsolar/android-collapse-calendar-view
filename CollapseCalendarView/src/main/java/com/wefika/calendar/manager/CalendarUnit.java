@@ -60,9 +60,13 @@ public abstract class CalendarUnit {
         return mSelected;
     }
 
+    public abstract boolean hasDate(@NonNull LocalDate date);
+
     public abstract boolean hasNext();
 
     public abstract boolean hasPrev();
+
+    public abstract boolean setPeriod(@NonNull LocalDate date);
 
     public abstract boolean next();
 
