@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.github.gfranks.collapsible.calendar.CollapsibleCalendarView
+        android:id="@+id/calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#48848F"
+        android:paddingRight="5dp"
+        android:paddingLeft="5dp"
+        app:ccv_state="month"
+        app:ccv_arrowColor="#FFFFFF"
+        app:ccv_headerTextColor="#FFFFFF"
+        app:ccv_weekDayTextColor="#FFFFFF"
+        app:ccv_dayTextColor="#FFFFFF"
+        app:ccv_eventIndicatorColor="#FFE18B"
+        app:ccv_selectedDayBackgroundColor="#175662"
+        app:ccv_allowStateChange="true"/>
+
+    <ListView
+        android:id="@+id/calendar_event_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="day">
+        <attr name="state_current" format="boolean" />
+    </declare-styleable>
+
+    <attr name="calendarViewStyle" format="reference" />
+
+    <declare-styleable name="CollapsibleCalendarView">
+        <attr name="ccv_state" format="enum">
+            <enum name="month" value="0" />
+            <enum name="week" value="1" />
+        </attr>
+        <attr name="ccv_arrowColor" format="reference|color" />
+        <attr name="ccv_prevArrowSrc" format="reference" />
+        <attr name="ccv_nextArrowSrc" format="reference" />
+        <attr name="ccv_headerTextColor" format="reference|color" />
+        <attr name="ccv_boldHeaderText" format="boolean" />
+        <attr name="ccv_weekDayTextColor" format="reference|color" />
+        <attr name="ccv_boldWeekDayText" format="boolean" />
+        <attr name="ccv_dayTextColor" format="reference|color" />
+        <attr name="ccv_eventIndicatorColor" format="reference|color" />
+        <attr name="ccv_selectedDayTextColor" format="reference|color" />
+        <attr name="ccv_selectedDayBackgroundColor" format="reference|color" />
+        <attr name="ccv_smallHeader" format="boolean" />
+        <attr name="ccv_noHeader" format="boolean" />
+        <attr name="ccv_showInactiveDays" format="boolean" />
+        <attr name="ccv_allowStateChange" format="boolean" />
+        <attr name="ccv_disableSwipe" format="boolean" />
+    </declare-styleable>
+
+</resources>

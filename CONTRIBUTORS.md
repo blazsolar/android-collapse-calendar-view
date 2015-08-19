@@ -1,8 +1,8 @@
-# Contributors to CollapseCalendarView project
+# Contributors to CollapsibleCalendarView project
 
 ## Creator & Maintainer
 
-* Blaž Šolar <solarblaz@gmail.com>
+* Garrett Franks <lgfz71@gmail.com>
  
 ## Contributors
 
