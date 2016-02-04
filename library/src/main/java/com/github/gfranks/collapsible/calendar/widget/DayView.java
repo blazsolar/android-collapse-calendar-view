@@ -2,6 +2,7 @@ package com.github.gfranks.collapsible.calendar.widget;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -38,17 +39,14 @@ public class DayView extends LinearLayout {
         super(context, attrs, defStyle);
         setOrientation(VERTICAL);
         setGravity(Gravity.CENTER);
+    }
 
-        mDayViewText = new TextView(context);
-        mEventIndicator = new ImageView(context);
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
 
-        LayoutParams lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        lp.gravity = Gravity.CENTER_HORIZONTAL;
-        super.addView(mDayViewText, 0, lp);
-
-        lp = new LayoutParams(10, 10);
-        lp.gravity = Gravity.CENTER_HORIZONTAL;
-        super.addView(mEventIndicator, 1, lp);
+        mDayViewText = (TextView) findViewById(R.id.day_view_text);
+        mEventIndicator = (ImageView) findViewById(R.id.day_view_indicator);
 
         updateEventIndicatorDrawable();
         mEventIndicator.setVisibility(View.INVISIBLE);
@@ -117,41 +115,6 @@ public class DayView extends LinearLayout {
         }
 
         return state;
-    }
-
-    @Override
-    public void addView(@NonNull View child) {
-        throw new IllegalStateException("addView is not supported");
-    }
-
-    @Override
-    public void addView(@NonNull View child, int index) {
-        throw new IllegalStateException("addView is not supported");
-    }
-
-    @Override
-    public void addView(@NonNull View child, int index, ViewGroup.LayoutParams params) {
-        throw new IllegalStateException("addView is not supported");
-    }
-
-    @Override
-    public void addView(@NonNull View child, ViewGroup.LayoutParams params) {
-        throw new IllegalStateException("addView is not supported");
-    }
-
-    @Override
-    public void addView(@NonNull View child, int width, int height) {
-        throw new IllegalStateException("addView is not supported");
-    }
-
-    @Override
-    protected boolean addViewInLayout(@NonNull View child, int index, ViewGroup.LayoutParams params) {
-        throw new IllegalStateException("addViewInLayout is not supported");
-    }
-
-    @Override
-    protected boolean addViewInLayout(@NonNull View child, int index, ViewGroup.LayoutParams params, boolean preventRequestLayout) {
-        throw new IllegalStateException("addViewInLayout is not supported");
     }
 
     private void updateEventIndicatorDrawable() {
