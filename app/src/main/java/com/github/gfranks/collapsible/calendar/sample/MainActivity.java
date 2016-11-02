@@ -29,6 +29,8 @@ public class MainActivity extends Activity implements CollapsibleCalendarView.Li
         mCalendarView = (CollapsibleCalendarView) findViewById(R.id.calendar);
         mListView = (ListView) findViewById(R.id.calendar_event_list);
 
+        mCalendarView.setMaxDate(LocalDate.now());
+        mCalendarView.setMinDate(LocalDate.now().minusYears(1));
         mCalendarView.setListener(this);
         mCalendarView.addEvents(getEvents());
     }
@@ -36,7 +38,7 @@ public class MainActivity extends Activity implements CollapsibleCalendarView.Li
     private List<Event> getEvents() {
         List<Event> events = new ArrayList<>();
         for (int i=0; i<20; i++) {
-            events.add(new Event("Event " + (i+1), System.currentTimeMillis() + (86400000 * i)));
+            events.add(new Event("Event " + (i+1), System.currentTimeMillis() - (86400000 * i)));
         }
         return events;
     }
@@ -50,6 +52,8 @@ public class MainActivity extends Activity implements CollapsibleCalendarView.Li
             mAdapter.setEvents(events);
         }
     }
+
+
 
     @Override
     public void onMonthChanged(LocalDate date) {

@@ -66,7 +66,7 @@ public class CollapsibleCalendarView extends LinearLayout implements View.OnClic
     private ResizeManager mResizeManager;
     private boolean mInitialized;
     private final GestureDetector mGestureDetector;
-
+    CollapsibleState startingState = CollapsibleState.MONTH;
     public CollapsibleCalendarView(Context context) {
         this(context, null);
     }
@@ -78,7 +78,7 @@ public class CollapsibleCalendarView extends LinearLayout implements View.OnClic
     public CollapsibleCalendarView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
-        CollapsibleState startingState = CollapsibleState.MONTH;
+
         if (attrs != null) {
             TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CollapsibleCalendarView, 0, 0);
             try {
@@ -252,6 +252,7 @@ public class CollapsibleCalendarView extends LinearLayout implements View.OnClic
 
     public void setMinDate(LocalDate minDate) {
         getManager().setMinDate(minDate);
+        reload_manager();
     }
 
     public LocalDate getMaxDate() {
@@ -260,6 +261,7 @@ public class CollapsibleCalendarView extends LinearLayout implements View.OnClic
 
     public void setMaxDate(LocalDate maxDate) {
         getManager().setMaxDate(maxDate);
+        reload_manager();
     }
 
     public void setTitle(String text) {
@@ -616,6 +618,14 @@ public class CollapsibleCalendarView extends LinearLayout implements View.OnClic
             }
 
             return false;
+        }
+    }
+
+
+    private void reload_manager(){
+        if (mManager != null) {
+            mManager = new CalendarManager(LocalDate.now(), startingState, getManager().getMinDate(), getManager().getMaxDate());
+
         }
     }
 
